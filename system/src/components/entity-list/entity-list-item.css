@@ -1,0 +1,23 @@
+.tr-Quoted, .tr-Sample {
+  background-color: #ffeb3b
+}
+
+.tr-Active, .tr-Manufacturing {
+  background-color: #e57373
+}
+
+.tr-NotActive {
+  background-color: #bcaaa4
+}
+
+.tr-Signed, .tr-Delivering {
+  background-color: #ce93d8
+}
+
+.tr-Done {
+  background-color: #4caf50
+}
+
+.tr-Closed {
+  background-color: #9e9e9e
+}

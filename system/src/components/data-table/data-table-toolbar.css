@@ -1,0 +1,11 @@
+.list-toolbar button, .list-toolbar input {
+  line-height: 20px;
+}
+
+.list-toolbar input {
+  width: 250px;
+}
+
+.list-toolbar .btn-group.pull-right {
+  margin-left: 5px;
+}

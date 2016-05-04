@@ -1,0 +1,10 @@
+.dataTable th, .dataTable td {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Use custom search input field for redux integration */
+#datatable1_filter {
+  display: none;
+}
