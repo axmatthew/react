@@ -51,6 +51,13 @@ class App extends Component {
 
   googleAppScriptAuth() {
     this.checkAuth();
+
+    // auto-refresh token
+    const AUTO_REFRESH_INTERVAL_MS = 3600000;
+
+    window.setInterval(() => {
+      this.checkAuth();
+    }, AUTO_REFRESH_INTERVAL_MS);
   }
 
   checkAuth() {
