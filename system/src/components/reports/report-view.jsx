@@ -20,19 +20,29 @@ class ReportView extends Component {
       this.props.enquiryListUi.get('loading') || this.props.purchaseOrderListUi.get('loading') ||
       this.props.enquiryListUi.get('error') || this.props.purchaseOrderListUi.get('error')
     )) {
-      this.drawEnquiryReportByStaff('enquiry-report-by-staff-container');
-      window.setTimeout(() =>
-        this.drawEnquiryReportByMonth('enquiry-report-by-month-container'), 800);
-      window.setTimeout(() =>
-        this.drawSalesReportByStaff('sales-report-by-staff-container', po =>
+      const drawMethods = [
+        () => this.drawSalesReportByStaff('sales-report-by-staff-container', po =>
           Number(po.get('signDate').split('-')[0]) === new Date().getFullYear() &&
-          Number(po.get('signDate').split('-')[1]) === new Date().getMonth() + 1), 1600);
-      window.setTimeout(() =>
-        this.drawSalesReportByStaff('sales-report-by-staff-last-month-container', po =>
+          Number(po.get('signDate').split('-')[1]) === new Date().getMonth() + 1),
+        () => this.drawSalesReportByStaff('sales-report-by-staff-last-month-container', po =>
           Number(po.get('signDate').split('-')[0]) === new Date().getFullYear() &&
-          Number(po.get('signDate').split('-')[1]) === new Date().getMonth(), 'Last month'), 2400);
-      window.setTimeout(() =>
-        this.drawSalesReportByMonth('sales-report-by-month-container'), 3200);
+          Number(po.get('signDate').split('-')[1]) === new Date().getMonth(), 'Last month'),
+        () => this.drawSalesReportByMonth('sales-report-by-month-container'),
+        () => this.drawEnquiryReportByStaff('enquiry-report-by-staff-container'),
+        () => this.drawEnquiryReportByMonth('enquiry-report-by-month-container')
+      ];
+
+      // draw the graphs one by one otherwise google charts do not work
+      const DRAW_INTERVAL_MS = 600;
+      const timer = window.setInterval(() => {
+        const method = drawMethods.shift();
+
+        if (method) {
+          method();
+        } else {
+          window.clearInterval(timer);
+        }
+      }, DRAW_INTERVAL_MS);
     }
   }
 
@@ -183,16 +193,6 @@ class ReportView extends Component {
         loading={enquiryListUi.get('loading') || purchaseOrderListUi.get('loading')}
         error={enquiryListUi.get('error') || purchaseOrderListUi.get('error')}
       >
-        <Panel header="Enquiry Reports" type="success">
-          <div className="row">
-            <div className="col-md-6">
-              <div id="enquiry-report-by-staff-container" style={{ height: 300 }} />
-            </div>
-            <div className="col-md-6">
-              <div id="enquiry-report-by-month-container" style={{ height: 300 }} />
-            </div>
-          </div>
-        </Panel>
         <Panel header="Sales Reports" type="info">
           <div className="row">
             <div className="col-md-6">
@@ -203,6 +203,16 @@ class ReportView extends Component {
             </div>
             <div className="col-md-6">
               <div id="sales-report-by-month-container" style={{ height: 300 }} />
+            </div>
+          </div>
+        </Panel>
+        <Panel header="Enquiry Reports" type="success">
+          <div className="row">
+            <div className="col-md-6">
+              <div id="enquiry-report-by-staff-container" style={{ height: 300 }} />
+            </div>
+            <div className="col-md-6">
+              <div id="enquiry-report-by-month-container" style={{ height: 300 }} />
             </div>
           </div>
         </Panel>
