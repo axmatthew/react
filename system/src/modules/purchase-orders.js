@@ -170,7 +170,7 @@ export default Object.assign({}, originalEntityModule, (() => {
             .setIn(['newView', 'ui', 'loading'], true);
         case CREATE_SUCCESS:
           // set responded data and cancel loading
-          return state.setIn(['newView', 'data', 'entity'], fromJS(action.payload))
+          return state.setIn(['newView', 'data', 'created'], fromJS(action.payload))
             .setIn(['newView', 'ui', 'error'], null)
             .setIn(['newView', 'ui', 'loading'], false);
         case CREATE_FAILURE:
