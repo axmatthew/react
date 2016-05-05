@@ -298,7 +298,7 @@ export default Object.assign({}, originalEntityModule, (() => {
             type: 2,
             title: `${purchaseOrder.poNum}廠訂金 (${purchaseOrder.companyName})`,
             date: startDate,
-            amount: totalCost * 0.3,
+            amount: +(totalCost * 0.3).toFixed(2),
             done: false
           }));
 
@@ -309,7 +309,7 @@ export default Object.assign({}, originalEntityModule, (() => {
             type: 3,
             title: `${purchaseOrder.poNum}廠尾數 (${purchaseOrder.companyName})`,
             date: deliveryDate,
-            amount: totalCost * 0.7,
+            amount: +(totalCost * 0.7).toFixed(2),
             done: false
           }));
         }
@@ -322,7 +322,7 @@ export default Object.assign({}, originalEntityModule, (() => {
             type: 0,
             title: `${purchaseOrder.poNum}客訂金 (${purchaseOrder.companyName})`,
             date: startDate,
-            amount: totalPrice * 0.5,
+            amount: +(totalPrice * 0.5).toFixed(2),
             done: false
           }));
 
@@ -333,7 +333,7 @@ export default Object.assign({}, originalEntityModule, (() => {
             type: 1,
             title: `${purchaseOrder.poNum}客尾數 (${purchaseOrder.companyName})`,
             date: deadline,
-            amount: totalPrice * 0.5,
+            amount: +(totalPrice * 0.5).toFixed(2),
             done: false
           }));
         }
