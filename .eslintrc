@@ -16,6 +16,14 @@
     "es6": true
   },
 
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    }
+  },
+
   "rules": {
     "comma-dangle": 0,
     "indent": [2, 2, { "SwitchCase": 1 }],

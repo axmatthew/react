@@ -42,7 +42,8 @@ module.exports = {
   postcss: [autoprefixer],
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: ['node_modules', 'components', 'node_modules/bootstrap/dist/css']
   },
 
   plugins: [
