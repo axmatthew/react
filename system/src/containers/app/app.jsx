@@ -12,6 +12,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import Sidebar from '../../components/sidebar/sidebar';
 import UserBlockContainer from '../users/user-block-container';
+import HeaderDropdownContainer from '../header/header-dropdown-container';
 import './app.css';
 
 class App extends Component {
@@ -92,7 +93,7 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper">
-        <Header />
+        <Header headerDropdown={<HeaderDropdownContainer />} />
         <Sidebar entityConfigs={this.props.entityConfigs} userBlock={<UserBlockContainer />} />
         <section>
           <div id="authorize-div" style={{ display: 'none' }}>
