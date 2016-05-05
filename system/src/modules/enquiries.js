@@ -28,7 +28,7 @@ const INITIAL_STATE = fromJS({
       { label: 'Deadline', name: 'deadline', type: 'text' },
       { label: 'Status', name: 'status', type: 'choice', choices: [
         'New', 'Quoted', 'Active', 'NotActive', 'Signed', 'Done', 'Closed'
-      ], disabled: true },
+      ], defaultValue: 'New' },
       { label: 'Enquiry#', name: 'enquiryNum', type: 'text' },
       { label: 'Remarks', name: 'remarks', type: 'textarea' },
       { label: 'username', name: 'username', type: 'hidden' },

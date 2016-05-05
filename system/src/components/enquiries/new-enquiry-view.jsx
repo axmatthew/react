@@ -21,7 +21,10 @@ class NewEnquiryView extends NewView {
     const maxNum = Math.max.apply(null, enquiryNumbers.toJS());
     const newEnquiryNum = `${moment().format('YYMM')}${maxNum + 1}`;
 
-    return Map({ enquiryNum: newEnquiryNum });
+    return Map({
+      sales: this.props.user.get('username'),
+      enquiryNum: newEnquiryNum
+    });
   }
 
 }

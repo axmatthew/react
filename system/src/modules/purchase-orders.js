@@ -45,7 +45,7 @@ const INITIAL_STATE = fromJS({
       { label: '預計收尾數日', name: 'deadline', type: 'date', validations: { required: true } },
       { label: '狀態', name: 'status', type: 'choice', choices: [
         'New', 'Sample', 'Manufacturing', 'Delivering', 'Done', 'Closed'
-      ], disabled: true },
+      ], defaultValue: 'New' },
       { label: 'Finish Date', name: 'finishDate', type: 'date' },
       { label: 'Remarks', name: 'remarks', type: 'textarea' },
       { label: 'G.P. %', name: 'gpPercentage', transform: (value, entity) =>
