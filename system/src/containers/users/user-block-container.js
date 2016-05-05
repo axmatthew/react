@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
+import { List, Map } from 'immutable';
 import { login, logout } from '../../modules/users';
 import UserBlock from '../../components/users/user-block';
-import { basePropTypes } from '../container-helpers';
 
 class UserBlockContainer extends Component {
 
-  static propTypes = Object.assign({}, basePropTypes, {
-    login: React.PropTypes.func.isRequired
-  });
+  static propTypes = {
+    fieldConfigs: React.PropTypes.instanceOf(List).isRequired,
+    user: React.PropTypes.instanceOf(Map)
+  };
 
   constructor() {
     super();
@@ -29,9 +30,7 @@ class UserBlockContainer extends Component {
 
   render() {
     return React.createElement(UserBlock,
-      Object.assign({}, {
-        fieldConfigs: this.props.entityConfig.get('fields'),
-        user: this.props.data.get('user'),
+      Object.assign({}, this.props, {
         handleLogin: this.handleLogin,
         handleLogout: this.handleLogout
       }));
@@ -41,9 +40,8 @@ class UserBlockContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    entityConfig: state.users.get('entityConfig'),
-    ui: state.users.get('ui'),
-    data: state.users.get('data')
+    fieldConfigs: state.users.getIn(['entityConfig', 'fields']),
+    user: state.users.getIn(['data', 'user'])
   };
 }
 

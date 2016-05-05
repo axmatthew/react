@@ -1,12 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Map } from 'immutable';
+import { List } from 'immutable';
+import classNames from 'classnames';
 
 const HeaderDropdown = ({ newEnquiries }) => (
   <li className="dropdown dropdown-list">
     <a href="javascript:void(0);" data-toggle="dropdown">
       <em className="icon-bell" />
-      <div className="label label-danger">{newEnquiries.size}</div>
+      <div
+        className={classNames({
+          label: true,
+          'label-danger': newEnquiries.size > 0,
+          'label-success': !newEnquiries.size === 0
+        })}
+      >
+        {newEnquiries.size}
+      </div>
     </a>
     <ul className="dropdown-menu animated flipInX">
       <li>
@@ -35,7 +44,7 @@ const HeaderDropdown = ({ newEnquiries }) => (
 );
 
 HeaderDropdown.propTypes = {
-  newEnquiries: React.PropTypes.instanceOf(Map).isRequired
+  newEnquiries: React.PropTypes.instanceOf(List).isRequired
 };
 
 export default HeaderDropdown;
