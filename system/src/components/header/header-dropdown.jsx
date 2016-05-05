@@ -11,7 +11,7 @@ const HeaderDropdown = ({ newEnquiries }) => (
         className={classNames({
           label: true,
           'label-danger': newEnquiries.size > 0,
-          'label-success': !newEnquiries.size === 0
+          'label-success': newEnquiries.size === 0
         })}
       >
         {newEnquiries.size}
