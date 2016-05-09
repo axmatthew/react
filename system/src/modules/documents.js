@@ -72,6 +72,12 @@ const INITIAL_STATE = fromJS({
     data: {
       entity: null
     }
+  },
+  acls: {
+    'purchase@123.com': [
+      { keyPath: ['listView', 'ui', 'actions'], value: [] },
+      { keyPath: ['listView', 'ui', 'listActions'], value: [] },
+    ]
   }
 });
 

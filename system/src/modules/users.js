@@ -72,6 +72,12 @@ export function login(email, password) {
 
         const user = { email, password, username };
 
+        // Apply ACL config to all modules
+        dispatch(enquiryModule.applyAcl(email));
+        dispatch(purchaseOrderModule.applyAcl(email));
+        dispatch(documentModule.applyAcl(email));
+        dispatch(cashFlowModule.applyAcl(email));
+
         dispatch(loginSuccess(user));
 
         // Set user object to localStorage for autoLogin use

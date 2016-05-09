@@ -23,17 +23,15 @@ class PurchaseOrderListViewContainer extends Component {
   componentWillMount() {
     // user already set, i.e. from navigating
     const username = this.props.user && this.props.user.get('username');
-
-    if (username) {
-      this.props.fetchBy('sales', username);
-    }
+    this.fetchByUsername(username);
   }
 
   componentWillReceiveProps(nextProps) {
     // only fetch data related to the user by default
     if (this.props.user !== nextProps.user) {
       const username = nextProps.user && nextProps.user.get('username');
-      this.props.fetchBy('sales', username);
+
+      this.fetchByUsername(username);
     }
 
     // if ui.filters changed
@@ -52,6 +50,17 @@ class PurchaseOrderListViewContainer extends Component {
 
   componentWillUnmount() {
     this.props.unlistenAll();
+  }
+
+  fetchByUsername(username) {
+    if (username) {
+      // FIXME: fix hard code fetchAll for purchase staff
+      if (username === 'Purchase') {
+        this.props.fetchAll();
+      } else {
+        this.props.fetchBy('sales', username);
+      }
+    }
   }
 
   render() {

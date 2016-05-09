@@ -48,6 +48,8 @@ export function getEntityModule(entityUrl, INITIAL_STATE) {
   const SHOW_CONTEXT_MENU = `${entityUrl}/SHOW_CONTEXT_MENU`;
   const HIDE_CONTEXT_MENU = `${entityUrl}/HIDE_CONTEXT_MENU`;
 
+  const APPLY_ACL = `${entityUrl}/APPLY_ACL`;
+
   return {
     // Used as the reducer/state name
     entityUrl,
@@ -168,7 +170,17 @@ export function getEntityModule(entityUrl, INITIAL_STATE) {
         case HIDE_CONTEXT_MENU:
           // reset displayContextMenu to false, need to keep the contextMenuEntity
           return state.setIn(['listView', 'ui', 'displayContextMenu'], false);
-        default:
+        case APPLY_ACL: {
+          const acl = state.get('acls').get(action.payload);
+
+          if (acl) {
+            return acl.reduce((prev, rule) => (
+              prev.setIn(rule.get('keyPath'), rule.get('value'))
+            ), state);
+          }
+
+          return state;
+        } default:
           return state;
       }
     },
@@ -312,7 +324,13 @@ export function getEntityModule(entityUrl, INITIAL_STATE) {
 
     hideContextMenu: () => ({
       type: HIDE_CONTEXT_MENU
+    }),
+
+    applyAcl: email => ({
+      type: APPLY_ACL,
+      payload: email
     })
+
   };
 
   /**
