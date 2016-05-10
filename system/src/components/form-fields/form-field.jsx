@@ -3,6 +3,7 @@ import { Map } from 'immutable';
 import classNames from 'classnames';
 import TextField from './text-field';
 import NumberField from './number-field';
+import PasswordField from './password-field';
 import HiddenField from './hidden-field';
 import TextareaField from './textarea-field';
 import DateField from './date-field';
@@ -19,6 +20,8 @@ class FormField extends Component {
         return TextField;
       case 'number':
         return NumberField;
+      case 'password':
+        return PasswordField;
       case 'hidden':
         return HiddenField;
       case 'textarea':
