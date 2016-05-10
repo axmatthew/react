@@ -11,6 +11,10 @@ class DocumentListView extends ListView {
     return <DocumentListContextMenuContainer />;
   }
 
+  isLoading(ui) {
+    return super.isLoading(ui) && ui.get('generating');
+  }
+
 }
 
 export default DocumentListView;

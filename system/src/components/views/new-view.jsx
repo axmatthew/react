@@ -19,6 +19,10 @@ class NewView extends Component {
     return null;
   }
 
+  isLoading(ui) {
+    return ui.get('loading');
+  }
+
   handleSubmit(fields) {
     this.props.create(fields, this.props.entityConfig.get('url'));
   }
@@ -29,7 +33,7 @@ class NewView extends Component {
     return (
       <MainContent
         header={ui.get('title')}
-        loading={ui.get('loading')}
+        loading={this.isLoading(ui)}
         error={ui.get('error')}
       >
         <EntityForm

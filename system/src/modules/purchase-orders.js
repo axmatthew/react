@@ -241,7 +241,7 @@ export default Object.assign({}, originalEntityModule, (() => {
           if (redirectUrl) {
             dispatch(push(redirectUrl));
           }
-          window.console.info(enquiryModule.update(createdEntity.enquiryId, { status: 'Signed' }));
+
           // Change enquiry status to Signed
           dispatch(enquiryModule.update(createdEntity.enquiryId, { status: 'Signed' }));
 

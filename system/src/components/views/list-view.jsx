@@ -34,6 +34,10 @@ class ListView extends Component {
     return null;
   }
 
+  isLoading(ui) {
+    return ui.get('loading');
+  }
+
   handlePageChange(page) {
     this.props.setPage(page);
   }
@@ -87,11 +91,10 @@ class ListView extends Component {
     const displayEditButton = listActions.indexOf('edit') !== -1;
     const displayDeleteButton = listActions.indexOf('delete') !== -1;
 
-    // FIXME: generating is used in DocumentListView only
     return (
       <MainContent
         header={ui.get('title')}
-        loading={ui.get('loading') || ui.get('generating')}
+        loading={this.isLoading(ui)}
         error={ui.get('error')}
       >
         <EntityList
