@@ -1,11 +1,11 @@
 import React from 'react';
 
 const ErrorBox = ({ message }) => (
-  <div className="alert alert-danger">Error: {message}</div>
+  <div className="alert alert-danger">{`${message} Please refresh page.`}</div>
 );
 
 ErrorBox.propTypes = {
-  message: React.PropTypes.any.isRequired
+  message: React.PropTypes.string.isRequired
 };
 
 export default ErrorBox;

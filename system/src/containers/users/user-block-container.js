@@ -9,6 +9,8 @@ class UserBlockContainer extends Component {
 
   static propTypes = {
     fieldConfigs: React.PropTypes.instanceOf(List).isRequired,
+    loading: React.PropTypes.bool,
+    error: React.PropTypes.any,
     user: React.PropTypes.instanceOf(Map)
   };
 
@@ -41,6 +43,8 @@ class UserBlockContainer extends Component {
 function mapStateToProps(state) {
   return {
     fieldConfigs: state.users.getIn(['entityConfig', 'fields']),
+    loading: state.users.getIn(['ui', 'loading']),
+    error: state.users.getIn(['ui', 'error']),
     user: state.users.getIn(['data', 'user'])
   };
 }

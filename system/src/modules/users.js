@@ -18,7 +18,7 @@ const INITIAL_STATE = fromJS({
   entityConfig: {
     fields: [
       { label: 'Email', name: 'email', type: 'text' },
-      { label: 'PW', name: 'password', type: 'text' }
+      { label: 'PW', name: 'password', type: 'password' }
     ]
   },
   ui: {
