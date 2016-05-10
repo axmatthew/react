@@ -89,6 +89,7 @@ const INITIAL_STATE = fromJS({
     ui: {
       title: `New ${ENTITY_LABEL}`,
       loading: false,
+      fetchingDuplicates: false,
       error: null
     },
     data: {
@@ -199,16 +200,16 @@ export default Object.assign({}, originalEntityModule, (() => {
         case START_FETCH_DUPLICATES_FOR_NEW_VIEW:
           // set loading
           return state.setIn(['newView', 'ui', 'error'], null)
-            .setIn(['newView', 'ui', 'loading'], true);
+            .setIn(['newView', 'ui', 'fetchingDuplicates'], true);
         case FETCH_DUPLICATES_FOR_NEW_VIEW_SUCCESS:
           // set responded data and cancel loading
           return state.setIn(['newView', 'data', 'duplicates'], fromJS(action.payload))
             .setIn(['newView', 'ui', 'error'], null)
-            .setIn(['newView', 'ui', 'loading'], false);
+            .setIn(['newView', 'ui', 'fetchingDuplicates'], false);
         case FETCH_DUPLICATES_FOR_NEW_VIEW_FAILURE:
           // set error and cancel loading
           return state.setIn(['newView', 'ui', 'error'], action.payload)
-            .setIn(['newView', 'ui', 'loading'], false);
+            .setIn(['newView', 'ui', 'fetchingDuplicates'], false);
         case START_CREATE_CASH_FLOWS:
           // no state change
           // TODO: any ui logics for create cash flow records?

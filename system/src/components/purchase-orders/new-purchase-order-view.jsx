@@ -32,6 +32,10 @@ class NewPurchaseOrderView extends NewView {
     });
   }
 
+  isLoading(ui) {
+    return super.isLoading(ui) || ui.get('fetchingDuplicates');
+  }
+
 }
 
 export default NewPurchaseOrderView;

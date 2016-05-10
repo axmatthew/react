@@ -12,7 +12,7 @@ class DocumentListView extends ListView {
   }
 
   isLoading(ui) {
-    return super.isLoading(ui) && ui.get('generating');
+    return super.isLoading(ui) || ui.get('generating');
   }
 
 }
