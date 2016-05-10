@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import cashFlowModule from '../../modules/cash-flows';
+import purchaseOrderModule from '../../modules/purchase-orders';
 import CashFlowListContextMenu from '../../components/cash-flows/cash-flow-list-context-menu';
 import { baseMapStateToProps } from '../container-helpers';
 
@@ -26,5 +27,6 @@ export default connect(baseMapStateToProps.bind(null, cashFlowModule.entityUrl, 
   push,
   hideContextMenu: cashFlowModule.hideContextMenu,
   update: cashFlowModule.update,
-  remove: cashFlowModule.remove
+  remove: cashFlowModule.remove,
+  updatePurchaseOrder: purchaseOrderModule.update
 })(CashFlowListContextMenuContainer);
