@@ -19,6 +19,7 @@ import ReportViewContainer from './containers/reports/report-view-container';
 
 export default (
   <Route path="/" component={App}>
+    <Route path="index.html" />
     <Route path="reports" component={ReportViewContainer} />
     <Route path="enquiries" component={EnquiryListViewContainer} />
     <Route path="enquiries/new" component={NewEnquiryViewContainer} />

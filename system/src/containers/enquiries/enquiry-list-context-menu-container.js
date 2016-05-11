@@ -26,7 +26,8 @@ class EnquiryListContextMenuContainer extends Component {
 
 function mapStateToProps(state) {
   return Object.assign({}, baseMapStateToProps(enquiryModule.entityUrl, 'listView', state), {
-    poEntityConfig: state[purchaseOrderModule.entityUrl].get('entityConfig')
+    poEntityConfig: state[purchaseOrderModule.entityUrl].get('entityConfig'),
+    documentEntityConfig: state[documentModule.entityUrl].get('entityConfig')
   });
 }
 
@@ -35,5 +36,6 @@ export default connect(mapStateToProps, {
   hideContextMenu: enquiryModule.hideContextMenu,
   update: enquiryModule.update,
   remove: enquiryModule.remove,
+  documentListSearch: documentModule.listSearch,
   generateDocument: documentModule.generateDocument
 })(EnquiryListContextMenuContainer);

@@ -15,6 +15,7 @@ const INITIAL_STATE = fromJS({
       { label: '_id', name: '_id', type: 'hidden' },
       { label: 'Date', name: 'date', type: 'date', defaultValue: () =>
         new Date().toISOString().substring(0, 10) },
+      { label: 'Enquiry#', name: 'enquiryNum', type: 'text' },
       // TODO: remove the first empty string?
       { label: 'Sales', name: 'sales', type: 'choice', choices: [
         '', 'Dawson', 'Penny', 'Matthew'
@@ -29,7 +30,6 @@ const INITIAL_STATE = fromJS({
       { label: 'Status', name: 'status', type: 'choice', choices: [
         'New', 'Quoted', 'Active', 'NotActive', 'Signed', 'Done', 'Closed'
       ], defaultValue: 'New' },
-      { label: 'Enquiry#', name: 'enquiryNum', type: 'text' },
       { label: 'Remarks', name: 'remarks', type: 'textarea' },
       { label: 'username', name: 'username', type: 'hidden' },
       { label: 'createdAt', name: 'createdAt', type: 'hidden' }
@@ -40,7 +40,7 @@ const INITIAL_STATE = fromJS({
       title: `All ${ENTITY_LABEL}`,
       loading: false,
       error: null,
-      order: [[10, 'desc']],
+      order: [[1, 'desc']],
       page: 0,
       search: '',
       filters: [

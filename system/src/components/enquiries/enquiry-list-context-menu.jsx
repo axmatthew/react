@@ -9,6 +9,8 @@ class EnquiryListContextMenu extends ListContextMenu {
 
   static propTypes = Object.assign({}, ListContextMenu.propTypes, {
     poEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
+    documentEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
+    documentListSearch: React.PropTypes.func.isRequired,
     generateDocument: React.PropTypes.func.isRequired
   });
 
@@ -20,6 +22,7 @@ class EnquiryListContextMenu extends ListContextMenu {
     this.handleGenerateReceipt = this.handleGenerateReceipt.bind(this);
     this.handleGenerateDeliveryNote = this.handleGenerateDeliveryNote.bind(this);
     this.handleNewPurchaseOrder = this.handleNewPurchaseOrder.bind(this);
+    this.handleOpenDocuments = this.handleOpenDocuments.bind(this);
   }
 
   handleStatusUpdate(newStatus) {
@@ -82,6 +85,13 @@ class EnquiryListContextMenu extends ListContextMenu {
     this.props.push(`${this.props.poEntityConfig.get('url')}/new/${entity.get('_id')}`);
   }
 
+  handleOpenDocuments() {
+    const entity = this.props.data.get('contextMenuEntity');
+    // Redirect to document list view with search value as enqiuryNum
+    this.props.documentListSearch(entity.get('enquiryNum'));
+    this.props.push(this.props.documentEntityConfig.get('url'));
+  }
+
   getContextMenuItems() {
     const statusMenus = ['New', 'Quoted', 'Active', 'NotActive', 'Signed', 'Done', 'Closed'];
 
@@ -117,6 +127,11 @@ class EnquiryListContextMenu extends ListContextMenu {
         <ContextMenuItem label="Receipt" onItemClick={this.handleGenerateReceipt} />
         <ContextMenuItem label="Delivery Note" onItemClick={this.handleGenerateDeliveryNote} />
       </ContextSubMenu>,
+      <ContextMenuItem
+        key="Open Documents"
+        label="Open Documents"
+        onItemClick={this.handleOpenDocuments}
+      />,
       <ContextMenuItem key="New PO" label="New PO" onItemClick={this.handleNewPurchaseOrder} />
     ];
   }
