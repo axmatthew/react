@@ -9,9 +9,7 @@ import { baseMapStateToProps } from '../container-helpers';
 class PurchaseOrderListViewContainer extends Component {
 
   static propTypes = Object.assign({}, PurchaseOrderListView.propTypes, {
-    fetchAll: React.PropTypes.func.isRequired,
-    fetchBy: React.PropTypes.func.isRequired,
-    unlistenAll: React.PropTypes.func.isRequired
+    fetchAll: React.PropTypes.func.isRequired
   });
 
   constructor() {
@@ -21,45 +19,9 @@ class PurchaseOrderListViewContainer extends Component {
   }
 
   componentWillMount() {
-    // user already set, i.e. from navigating
-    const username = this.props.user && this.props.user.get('username');
-    this.fetchByUsername(username);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // only fetch data related to the user by default
-    if (this.props.user !== nextProps.user) {
-      const username = nextProps.user && nextProps.user.get('username');
-
-      this.fetchByUsername(username);
-    }
-
-    // if ui.filters changed
-    if (this.props.ui.get('filters') !== nextProps.ui.get('filters')) {
-      const salesFilter = nextProps.ui.get('filters')
-        .find(filter => filter.get('name') === 'sales');
-
-      // if the sales filter is set to empty string, fetchAll
-      if (salesFilter) {
-        if (!salesFilter.get('value')) {
-          this.props.fetchAll();
-        }
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.unlistenAll();
-  }
-
-  fetchByUsername(username) {
-    if (username) {
-      // FIXME: fix hard code fetchAll for purchase staff
-      if (username === 'Purchase') {
-        this.props.fetchAll();
-      } else {
-        this.props.fetchBy('sales', username);
-      }
+    // fetchAll if no entities, and do not unlisten on unmount
+    if (this.props.data.get('entities').size === 0) {
+      this.props.fetchAll();
     }
   }
 
@@ -72,8 +34,6 @@ class PurchaseOrderListViewContainer extends Component {
 
 export default connect(baseMapStateToProps.bind(null, purchaseOrderModule.entityUrl, 'listView'), {
   fetchAll: purchaseOrderModule.fetchAll,
-  fetchBy: purchaseOrderModule.fetchBy,
-  unlistenAll: purchaseOrderModule.unlistenAll,
 
   // Transfer to presentation component
   push,

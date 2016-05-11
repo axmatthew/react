@@ -9,9 +9,7 @@ import { baseMapStateToProps } from '../container-helpers';
 class EnquiryListViewContainer extends Component {
 
   static propTypes = Object.assign({}, EnquiryListView.propTypes, {
-    fetchAll: React.PropTypes.func.isRequired,
-    fetchBy: React.PropTypes.func.isRequired,
-    unlistenAll: React.PropTypes.func.isRequired
+    fetchAll: React.PropTypes.func.isRequired
   });
 
   constructor() {
@@ -21,37 +19,10 @@ class EnquiryListViewContainer extends Component {
   }
 
   componentWillMount() {
-    // user already set, i.e. from navigating
-    const username = this.props.user && this.props.user.get('username');
-
-    if (username) {
-      this.props.fetchBy('sales', username);
+    // fetchAll if no entities, and do not unlisten on unmount
+    if (this.props.data.get('entities').size === 0) {
+      this.props.fetchAll();
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // only fetch data related to the user by default
-    if (this.props.user !== nextProps.user) {
-      const username = nextProps.user && nextProps.user.get('username');
-      this.props.fetchBy('sales', username);
-    }
-
-    // if ui.filters changed
-    if (this.props.ui.get('filters') !== nextProps.ui.get('filters')) {
-      const salesFilter = nextProps.ui.get('filters')
-        .find(filter => filter.get('name') === 'sales');
-
-      // if the sales filter is set to empty string, fetchAll
-      if (salesFilter) {
-        if (!salesFilter.get('value')) {
-          this.props.fetchAll();
-        }
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.unlistenAll();
   }
 
   render() {
@@ -63,8 +34,6 @@ class EnquiryListViewContainer extends Component {
 
 export default connect(baseMapStateToProps.bind(null, enquiryModule.entityUrl, 'listView'), {
   fetchAll: enquiryModule.fetchAll,
-  fetchBy: enquiryModule.fetchBy,
-  unlistenAll: enquiryModule.unlistenAll,
 
   // Transfer to presentation component
   push,

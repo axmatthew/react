@@ -9,9 +9,9 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
 
   static propTypes = Object.assign({}, ListContextMenu.propTypes, {
     cashFlowEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
-    updateEnquiry: React.PropTypes.instanceOf(Map).isRequired,
-    createCashFlows: React.PropTypes.instanceOf(Map).isRequired,
-    cashFlowListSearch: React.PropTypes.instanceOf(Map).isRequired
+    updateEnquiry: React.PropTypes.func.isRequired,
+    createCashFlows: React.PropTypes.func.isRequired,
+    cashFlowListSearch: React.PropTypes.func.isRequired
   });
 
   constructor() {

@@ -10,9 +10,7 @@ class ReportViewContainer extends Component {
 
   static propTypes = Object.assign({}, ReportView.propTypes, {
     fetchAllEnquiries: React.PropTypes.func.isRequired,
-    fetchAllPurchaseOrders: React.PropTypes.func.isRequired,
-    unlistenAllEnquiries: React.PropTypes.func.isRequired,
-    unlistenAllPurchaseOrders: React.PropTypes.func.isRequired
+    fetchAllPurchaseOrders: React.PropTypes.func.isRequired
   });
 
   constructor() {
@@ -23,14 +21,14 @@ class ReportViewContainer extends Component {
 
   componentWillMount() {
     google.load('visualization', '1.1', { packages: ['bar'], callback: () => {
-      this.props.fetchAllEnquiries();
-      this.props.fetchAllPurchaseOrders();
-    } });
-  }
+      if (this.props.enquiries.size === 0) {
+        this.props.fetchAllEnquiries();
+      }
 
-  componentWillUnmount() {
-    this.props.unlistenAllEnquiries();
-    this.props.unlistenAllPurchaseOrders();
+      if (this.props.purchaseOrders.size === 0) {
+        this.props.fetchAllPurchaseOrders();
+      }
+    } });
   }
 
   render() {
@@ -51,7 +49,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   fetchAllEnquiries: enquiryModule.fetchAll,
-  fetchAllPurchaseOrders: purchaseOrderModule.fetchAll,
-  unlistenAllEnquiries: enquiryModule.unlistenAll,
-  unlistenAllPurchaseOrders: purchaseOrderModule.unlistenAll
+  fetchAllPurchaseOrders: purchaseOrderModule.fetchAll
 })(ReportViewContainer);
