@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import { autoLogin } from '../../modules/users';
 import enquiryModule from '../../modules/enquiries';
 import purchaseOrderModule from '../../modules/purchase-orders';
@@ -91,10 +91,15 @@ class App extends Component {
   }
 
   render() {
+    const { children, user, entityConfigs } = this.props;
+
     return (
       <div className="wrapper">
         <Header headerDropdown={<HeaderDropdownContainer />} />
-        <Sidebar entityConfigs={this.props.entityConfigs} userBlock={<UserBlockContainer />} />
+        <Sidebar
+          entityConfigs={user ? entityConfigs : List()}
+          userBlock={<UserBlockContainer />}
+        />
         <section>
           <div id="authorize-div" style={{ display: 'none' }}>
             <span>Authorize access to Google Apps Script Execution API</span>
@@ -106,7 +111,7 @@ class App extends Component {
               Authorize
             </button>
           </div>
-          {this.props.children}
+          {children}
         </section>
         <Footer />
       </div>
@@ -122,7 +127,8 @@ function mapStateToProps(state) {
       state[enquiryModule.entityUrl].get('entityConfig'),
       state[purchaseOrderModule.entityUrl].get('entityConfig'),
       state[documentModule.entityUrl].get('entityConfig'),
-      state[cashFlowModule.entityUrl].get('entityConfig')
+      state[cashFlowModule.entityUrl].get('entityConfig'),
+      Map({ label: 'Reports', url: 'reports', iconClass: 'graph' })
     ])
   };
 }

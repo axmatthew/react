@@ -24,9 +24,6 @@ const Sidebar = ({ entityConfigs, userBlock }) => (
               </li>
             ))
           }
-          <li>
-            <Link to="/reports"><em className="icon-graph" /><span>Reports</span></Link>
-          </li>
         </ul>
       </nav>
     </div>

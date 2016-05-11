@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
-import { Map, List } from 'immutable';
+import { List, Map } from 'immutable';
 import enquiryModule from '../../modules/enquiries';
 import HeaderDropdown from '../../components/header/header-dropdown';
 
@@ -19,11 +19,15 @@ class HeaderDropdownContainer extends Component {
   }
 
   render() {
+    const { user, enquiries } = this.props;
+
     return React.createElement(HeaderDropdown, {
-      newEnquiries: this.props.enquiries.filter(enquiry => (
-        enquiry.get('status') === 'New' &&
-          enquiry.get('sales') === this.props.user.get('username')
-      ))
+      newEnquiries: user
+        ? enquiries.filter(enquiry => (
+          enquiry.get('status') === 'New' &&
+          enquiry.get('sales') === user.get('username')
+        ))
+        : List()
     });
   }
 
