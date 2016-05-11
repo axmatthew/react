@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import enquiryModule from '../../modules/enquiries';
 import purchaseOrderModule from '../../modules/purchase-orders';
 import cashFlowModule from '../../modules/cash-flows';
 import PurchaseOrderListContextMenu from
@@ -35,6 +36,7 @@ export default connect(mapStateToProps, {
   hideContextMenu: purchaseOrderModule.hideContextMenu,
   update: purchaseOrderModule.update,
   remove: purchaseOrderModule.remove,
+  updateEnquiry: enquiryModule.update,
   createCashFlows: purchaseOrderModule.createCashFlows,
   cashFlowListSearch: cashFlowModule.listSearch
 })(PurchaseOrderListContextMenuContainer);

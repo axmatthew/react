@@ -1,4 +1,4 @@
-/* global $ swal */
+/* global $ moment swal */
 import React from 'react';
 import { Map } from 'immutable';
 import ContextSubMenu from '../context-menu/context-sub-menu';
@@ -8,7 +8,10 @@ import ListContextMenu from '../views/list-context-menu';
 class PurchaseOrderListContextMenu extends ListContextMenu {
 
   static propTypes = Object.assign({}, ListContextMenu.propTypes, {
-    cashFlowEntityConfig: React.PropTypes.instanceOf(Map).isRequired
+    cashFlowEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
+    updateEnquiry: React.PropTypes.instanceOf(Map).isRequired,
+    createCashFlows: React.PropTypes.instanceOf(Map).isRequired,
+    cashFlowListSearch: React.PropTypes.instanceOf(Map).isRequired
   });
 
   constructor() {
@@ -38,7 +41,35 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
 
   handleStatusUpdate(newStatus) {
     const entity = this.props.data.get('contextMenuEntity');
-    this.props.update(entity.get('_id'), { status: newStatus });
+
+    if (newStatus === 'Done') {
+      this.props.update(entity.get('_id'), {
+        status: newStatus,
+        finishDate: moment().format('YYYY-MM-DD')
+      });
+
+      swal({
+        title: 'Optional',
+        text: 'Do you want to also set the related enquiry to Done?',
+        type: 'info',
+        showCancelButton: true
+      }, () => {
+        this.props.updateEnquiry(entity.get('enquiryId'), { status: 'Done' });
+      });
+    } else if (newStatus === 'Closed') {
+      this.props.update(entity.get('_id'), { status: newStatus });
+
+      swal({
+        title: 'Optional',
+        text: 'Do you want to also set the related enquiry to Closed?',
+        type: 'info',
+        showCancelButton: true
+      }, () => {
+        this.props.updateEnquiry(entity.get('enquiryId'), { status: 'Closed' });
+      });
+    } else {
+      this.props.update(entity.get('_id'), { status: newStatus });
+    }
   }
 
   handleViewCashFlows() {
