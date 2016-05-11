@@ -21,8 +21,8 @@ class EnquiryListContextMenu extends ListContextMenu {
     this.handleGenerateDocument = this.handleGenerateDocument.bind(this);
     this.handleGenerateReceipt = this.handleGenerateReceipt.bind(this);
     this.handleGenerateDeliveryNote = this.handleGenerateDeliveryNote.bind(this);
-    this.handleNewPurchaseOrder = this.handleNewPurchaseOrder.bind(this);
     this.handleOpenDocuments = this.handleOpenDocuments.bind(this);
+    this.handleNewPurchaseOrder = this.handleNewPurchaseOrder.bind(this);
   }
 
   handleStatusUpdate(newStatus) {
@@ -80,16 +80,16 @@ class EnquiryListContextMenu extends ListContextMenu {
     });
   }
 
-  handleNewPurchaseOrder() {
-    const entity = this.props.data.get('contextMenuEntity');
-    this.props.push(`${this.props.poEntityConfig.get('url')}/new/${entity.get('_id')}`);
-  }
-
   handleOpenDocuments() {
     const entity = this.props.data.get('contextMenuEntity');
     // Redirect to document list view with search value as enqiuryNum
     this.props.documentListSearch(entity.get('enquiryNum'));
     this.props.push(this.props.documentEntityConfig.get('url'));
+  }
+
+  handleNewPurchaseOrder() {
+    const entity = this.props.data.get('contextMenuEntity');
+    this.props.push(`${this.props.poEntityConfig.get('url')}/new/${entity.get('_id')}`);
   }
 
   getContextMenuItems() {

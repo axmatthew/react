@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import enquiryModule from '../../modules/enquiries';
 import purchaseOrderModule from '../../modules/purchase-orders';
+import documentModule from '../../modules/documents';
 import cashFlowModule from '../../modules/cash-flows';
 import PurchaseOrderListContextMenu from
   '../../components/purchase-orders/purchase-order-list-context-menu';
@@ -27,6 +28,7 @@ class PurchaseOrderListContextMenuContainer extends Component {
 
 function mapStateToProps(state) {
   return Object.assign({}, baseMapStateToProps(purchaseOrderModule.entityUrl, 'listView', state), {
+    documentEntityConfig: state[documentModule.entityUrl].get('entityConfig'),
     cashFlowEntityConfig: state[cashFlowModule.entityUrl].get('entityConfig')
   });
 }
@@ -38,5 +40,8 @@ export default connect(mapStateToProps, {
   remove: purchaseOrderModule.remove,
   updateEnquiry: enquiryModule.update,
   createCashFlows: purchaseOrderModule.createCashFlows,
-  cashFlowListSearch: cashFlowModule.listSearch
+  cashFlowListSearch: cashFlowModule.listSearch,
+
+  documentListSearch: documentModule.listSearch,
+  generateDocument: documentModule.generateDocument
 })(PurchaseOrderListContextMenuContainer);

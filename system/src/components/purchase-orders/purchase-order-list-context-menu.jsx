@@ -11,7 +11,12 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
     cashFlowEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
     updateEnquiry: React.PropTypes.func.isRequired,
     createCashFlows: React.PropTypes.func.isRequired,
-    cashFlowListSearch: React.PropTypes.func.isRequired
+    cashFlowListSearch: React.PropTypes.func.isRequired,
+
+    // FIXME: duplicate code with EnquiryListContextMenu
+    documentEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
+    documentListSearch: React.PropTypes.func.isRequired,
+    generateDocument: React.PropTypes.func.isRequired
   });
 
   constructor() {
@@ -20,6 +25,10 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
     this.handleStatusUpdate = this.handleStatusUpdate.bind(this);
     this.handleViewCashFlows = this.handleViewCashFlows.bind(this);
     this.handleCreateCashFlows = this.handleCreateCashFlows.bind(this);
+
+    // FIXME: duplicate code with EnquiryListContextMenu
+    this.handleGenerateDocument = this.handleGenerateDocument.bind(this);
+    this.handleOpenDocuments = this.handleOpenDocuments.bind(this);
   }
 
   /** Override to provide extra message in alert */
@@ -42,6 +51,7 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
   handleStatusUpdate(newStatus) {
     const entity = this.props.data.get('contextMenuEntity');
 
+    // ask if user want to also change the status of related enquiry
     if (newStatus === 'Done') {
       this.props.update(entity.get('_id'), {
         status: newStatus,
@@ -93,6 +103,35 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
     });
   }
 
+  // FIXME: duplicate code with EnquiryListContextMenu
+  handleGenerateDocument(...args) {
+    const entity = this.props.data.get('contextMenuEntity');
+    const fakeEnquiry = entity.set('_id', entity.get('enquiryId'))
+      .set('enquiryNum', entity.get('poNum').substring(1));
+    this.props.generateDocument(fakeEnquiry, ...args);
+
+    if (args[0] === 'Quotation') {
+      swal({
+        title: 'Optional',
+        text: 'Do you want to set the enquiry status to Quoted?',
+        type: 'info',
+        showCancelButton: true
+      }, () => {
+        this.props.update(fakeEnquiry.get('_id'), { status: 'Quoted' });
+      });
+    }
+  }
+
+  // FIXME: duplicate code with EnquiryListContextMenu
+  handleOpenDocuments() {
+    const entity = this.props.data.get('contextMenuEntity');
+    const fakeEnquiry = entity.set('_id', entity.get('enquiryId'))
+      .set('enquiryNum', entity.get('poNum').substring(1));
+    // Redirect to document list view with search value as enqiuryNum
+    this.props.documentListSearch(fakeEnquiry.get('enquiryNum'));
+    this.props.push(this.props.documentEntityConfig.get('url'));
+  }
+
   getContextMenuItems() {
     const statusMenus = ['New', 'Sample', 'Manufacturing', 'Delivering', 'Done', 'Closed'];
 
@@ -117,6 +156,31 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
         key="Create Cash Flows"
         label="Create Cash Flows"
         onItemClick={this.handleCreateCashFlows}
+      />,
+
+      // FIXME: duplicate code with EnquiryListContextMenu
+      <ContextSubMenu key="Documents" label="Documents">
+        <ContextMenuItem
+          label="Quotation"
+          onItemClick={() => this.handleGenerateDocument('Quotation', 'Q')}
+        />
+        <ContextMenuItem
+          label="Sales Confirmation"
+          onItemClick={() => this.handleGenerateDocument('SalesConfirmation', 'S')}
+        />
+        <ContextMenuItem
+          label="Deposit Invoice"
+          onItemClick={() => this.handleGenerateDocument('Invoice', 'I', 'A')}
+        />
+        <ContextMenuItem
+          label="Remaining Invoice"
+          onItemClick={() => this.handleGenerateDocument('Invoice', 'I', 'B')}
+        />
+      </ContextSubMenu>,
+      <ContextMenuItem
+        key="Open Documents"
+        label="Open Documents"
+        onItemClick={this.handleOpenDocuments}
       />
     ];
   }
