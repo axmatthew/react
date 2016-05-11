@@ -22,6 +22,7 @@ class NewEnquiryViewContainer extends Component {
     // Ensure entities exists
     const entities = this.props.listData.get('entities');
 
+    // FIXME: cannot create enquiry if no existing enquiry, e.g. new account
     if (entities.size === 0) {
       // Go back to list view if entities not fetched yet
       // TODO: better mechanism to get new enquiryNum,

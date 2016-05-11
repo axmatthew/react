@@ -26,7 +26,8 @@ const INITIAL_STATE = fromJS({
       { label: 'generated', name: 'generated', type: 'bool', disabled: true },
       { label: 'gSheetId', name: 'gSheetId', type: 'text', disabled: true }
     ],
-    iconClass: 'doc'
+    iconClass: 'doc',
+    accountName: 'master'
   },
   listView: {
     ui: {
@@ -88,6 +89,8 @@ export default Object.assign({}, originalEntityModule, (() => {
   const GENERATE_DOCUMENT_SUCCESS = `${ENTITY_URL}/GENERATE_DOCUMENT_SUCCESS`;
   const GENERATE_DOCUMENT_FAILURE = `${ENTITY_URL}/GENERATE_DOCUMENT_FAILURE`;
 
+  const SET_ACCOUNT_NAME = `${ENTITY_URL}/SET_ACCOUNT_NAME`;
+
   return {
 
     // Extends the original reducer
@@ -109,6 +112,9 @@ export default Object.assign({}, originalEntityModule, (() => {
           // set error and cancel generating
           return state.setIn(['listView', 'ui', 'error'], action.payload)
             .setIn(['listView', 'ui', 'generating'], false);
+        case SET_ACCOUNT_NAME:
+          // set accountName
+          return state.setIn(['entityConfig', 'accountName'], action.payload);
         default:
           return state;
       }
@@ -124,6 +130,7 @@ export default Object.assign({}, originalEntityModule, (() => {
 
       // Create an dummy document object first
       const apiUrl = getState()[ENTITY_URL].getIn(['entityConfig', 'apiUrl']);
+      const accountName = getState()[ENTITY_URL].getIn(['entityConfig', 'accountName']);
       const username = getState().users.getIn(['data', 'user', 'username']);
 
       StoreFactory.getInstance().insert(apiUrl, {
@@ -136,8 +143,8 @@ export default Object.assign({}, originalEntityModule, (() => {
           // TODO: go back to enquiry list?
         } else {
           // Then generate the document
-          generateDocument(enquiry.toJS(), docType, prefix, suffix, parameters, username,
-            (error2, document) => {
+          generateDocument(enquiry.toJS(), docType, prefix, suffix, parameters,
+            accountName, username, (error2, document) => {
               if (error2) {
                 dispatch(generateDocumentFailure(error2));
                 // TODO: remove the dummy document object and back to enquiry list?
@@ -150,7 +157,13 @@ export default Object.assign({}, originalEntityModule, (() => {
           );
         }
       });
-    }
+    },
+
+    /** set the accountName for App Script Execution API */
+    setAccountName: accountName => ({
+      type: SET_ACCOUNT_NAME,
+      payload: accountName
+    })
 
   };
 
@@ -189,7 +202,7 @@ export default Object.assign({}, originalEntityModule, (() => {
    */
   function generateDocument(
     enquiry, docType, prefix = '', suffix = '',
-    docParams, username, callback
+    docParams, accountName, username, callback
   ) {
     let documentNum = `${prefix}${enquiry.enquiryNum}${suffix}`;
     // FIXME: determine how many document with the same documentNum already created
@@ -200,7 +213,7 @@ export default Object.assign({}, originalEntityModule, (() => {
     }
 
     // Determine the codes of Quotation/Invoice/SalesConfirmation
-    const codes = enquiry.description.match(/<[\w\-]*>/g) || ['<>'];
+    const codes = enquiry.description && enquiry.description.match(/<[\w\-]*>/g) || ['<>'];
 
     for (let i = 0; i < codes.length; i++) {
       codes[i] = codes[i].substring(1, codes[i].length - 1);
@@ -219,8 +232,6 @@ export default Object.assign({}, originalEntityModule, (() => {
       callFunc += docType;
     }
 
-    // TODO: determine accountName
-    const accountName = 'master';
     // Quotation/Invoice/SalesConfirmation use codes, other use docParams
     const scriptParams = [accountName, username, enquiry, docParams || codes];
 

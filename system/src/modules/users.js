@@ -66,9 +66,23 @@ export function login(email, password) {
         dispatch(loginFailure(error));
       } else {
         // turn matthew-cheng@email.com to Matthew Cheng
-        const username = authData.password.email.replace(/@.*/, '').replace(/\b\w/g, m => (
-          m.toUpperCase()
-        ));
+        const emailTokens = authData.password.email.replace(/@.*/, '').split('-');
+        let username;
+
+        if (emailTokens.length === 1) {
+          // handle master account, e.g. Penny@123.com
+          username = emailTokens[0].replace(/\b\w/g, m => (
+            m.toUpperCase()
+          ));
+        } else {
+          // handle other accont, e.g. ppp-mon@appx.hk
+          username = emailTokens[1].replace(/\b\w/g, m => (
+            m.toUpperCase()
+          ));
+
+          // Set accountName
+          dispatch(documentModule.setAccountName(emailTokens[0]));
+        }
 
         const user = { email, password, username };
 
