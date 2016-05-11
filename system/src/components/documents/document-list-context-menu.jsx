@@ -14,10 +14,10 @@ class DocumentListContextMenu extends ListContextMenu {
     this.handleOpenGoogleSheets = this.handleOpenGoogleSheets.bind(this);
   }
 
-  handleDownloadExcel() {
+  handleOpenGoogleSheets() {
     const entity = this.props.data.get('contextMenuEntity');
     window.open(`https://docs.google.com/spreadsheets/d/\
-${entity.get('gSheetId')}/export?format=xlsx`, '_self');
+${entity.get('gSheetId')}/edit`, '_blank');
   }
 
   handleDownloadPdf() {
@@ -26,21 +26,21 @@ ${entity.get('gSheetId')}/export?format=xlsx`, '_self');
 ${entity.get('gSheetId')}/export?format=pdf&gridlines=0&portrait=1&fitw=1`, '_self');
   }
 
-  handleOpenGoogleSheets() {
+  handleDownloadExcel() {
     const entity = this.props.data.get('contextMenuEntity');
     window.open(`https://docs.google.com/spreadsheets/d/\
-${entity.get('gSheetId')}/edit`, '_blank');
+${entity.get('gSheetId')}/export?format=xlsx`, '_self');
   }
 
   getContextMenuItems() {
     return [
-      <ContextMenuItem key="Excel" label="Excel" onItemClick={this.handleDownloadExcel} />,
-      <ContextMenuItem key="PDF" label="PDF" onItemClick={this.handleDownloadPdf} />,
       <ContextMenuItem
         key="Google Sheets"
         label="Google Sheets"
         onItemClick={this.handleOpenGoogleSheets}
-      />
+      />,
+      <ContextMenuItem key="PDF" label="PDF" onItemClick={this.handleDownloadPdf} />,
+      <ContextMenuItem key="Excel" label="Excel" onItemClick={this.handleDownloadExcel} />
     ];
   }
 

@@ -30,6 +30,17 @@ class EnquiryListContextMenu extends ListContextMenu {
   handleGenerateDocument(...args) {
     const entity = this.props.data.get('contextMenuEntity');
     this.props.generateDocument(entity, ...args);
+
+    if (args[0] === 'Quotation') {
+      swal({
+        title: 'Optional',
+        text: 'Do you want to set the enquiry status to Quoted?',
+        type: 'info',
+        showCancelButton: true
+      }, () => {
+        this.props.update(entity.get('_id'), { status: 'Quoted' });
+      });
+    }
   }
 
   handleGenerateReceipt() {
