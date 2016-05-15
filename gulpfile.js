@@ -33,7 +33,12 @@ gulp.task('build', function(cb) {
     resolve: {
       extensions: ['', '.js', '.jsx'],
       modulesDirectories: ['node_modules', 'components', 'node_modules/bootstrap/dist/css']
-    }
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
+      })
+    ]
   }, function webpackCallback(err, stats) {
     cb(err);
   });
