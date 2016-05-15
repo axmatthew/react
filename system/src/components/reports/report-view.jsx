@@ -10,16 +10,13 @@ class ReportView extends Component {
     user: React.PropTypes.instanceOf(Map),
     enquiryListUi: React.PropTypes.instanceOf(Map).isRequired,
     purchaseOrderListUi: React.PropTypes.instanceOf(Map).isRequired,
-    enquiries: React.PropTypes.instanceOf(List),
-    purchaseOrders: React.PropTypes.instanceOf(List)
+    enquiries: React.PropTypes.instanceOf(List).isRequired,
+    purchaseOrders: React.PropTypes.instanceOf(List).isRequired
   };
 
   componentDidUpdate() {
     // TODO: better entities ready condition checking?
-    if (!(
-      this.props.enquiryListUi.get('loading') || this.props.purchaseOrderListUi.get('loading') ||
-      this.props.enquiryListUi.get('error') || this.props.purchaseOrderListUi.get('error')
-    )) {
+    if (this.props.enquiries.size > 0 && this.props.purchaseOrders.size > 0) {
       const drawMethods = [
         () => this.drawSalesReportByStaff('sales-report-by-staff-container', po =>
           Number(po.get('signDate').split('-')[0]) === new Date().getFullYear() &&
@@ -174,7 +171,8 @@ class ReportView extends Component {
 
   // FIXME: duplicate code with modules/purchase-orders.jsx
   calculateGp(purchaseOrder) {
-    const EX_HKD_RMB = 0.843;
+    // FIXME: put exchange rate in a new settings module
+    const EX_HKD_RMB = 0.84;
     const totalPrice = purchaseOrder.price * purchaseOrder.amount;
     const totalCost = purchaseOrder.cost *
       (purchaseOrder.amount + (purchaseOrder.spareAmount || 0)) +

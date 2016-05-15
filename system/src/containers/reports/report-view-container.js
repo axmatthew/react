@@ -31,6 +31,19 @@ class ReportViewContainer extends Component {
     } });
   }
 
+  componentWillReceiveProps(nextProps) {
+    // fetch data after login
+    if (this.props.user !== nextProps.user) {
+      if (this.props.enquiries.size === 0) {
+        this.props.fetchAllEnquiries();
+      }
+
+      if (this.props.purchaseOrders.size === 0) {
+        this.props.fetchAllPurchaseOrders();
+      }
+    }
+  }
+
   render() {
     return React.createElement(ReportView, this.props);
   }

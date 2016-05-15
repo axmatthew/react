@@ -174,8 +174,8 @@ const INITIAL_STATE = fromJS({
 });
 
 function calculateGp(purchaseOrder) {
-  // TODO: move this to settings
-  const EX_HKD_RMB = 0.843;
+  // FIXME: put exchange rate in a new settings module
+  const EX_HKD_RMB = 0.84;
   const totalPrice = purchaseOrder.price * purchaseOrder.amount;
   const totalCost = purchaseOrder.cost *
     (purchaseOrder.amount + (purchaseOrder.spareAmount || 0)) +
