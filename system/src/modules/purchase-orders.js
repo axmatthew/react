@@ -11,7 +11,7 @@ const ENTITY_LABEL = 'Purchase Orders';
 
 const INITIAL_STATE = fromJS({
   entityConfig: {
-    apiUrl: ENTITY_URL,
+    apiUrl: 'SET_IN_ACL',
     label: ENTITY_LABEL,
     url: ENTITY_URL,
     identity: '_id',
@@ -21,12 +21,8 @@ const INITIAL_STATE = fromJS({
       { label: 'Sign Date', name: 'signDate', type: 'date', defaultValue: () =>
         new Date().toISOString().substring(0, 10) },
       { label: 'PO#', name: 'poNum', type: 'text' },
-      { label: 'Purchase', name: 'purchase', type: 'choice', choices: [
-        '', 'Eva', 'Lucy', 'Dawson', 'Penny', 'Matthew'
-      ] },
-      { label: 'Sales', name: 'sales', type: 'choice', choices: [
-        '', 'Dawson', 'Penny', 'Matthew'
-      ] },
+      { label: 'Purchase', name: 'purchase', type: 'choice', choices: [] },
+      { label: 'Sales', name: 'sales', type: 'choice', choices: [] },
       { label: 'Company Name', name: 'companyName', type: 'text' },
       { label: 'Contact Person', name: 'contactPerson', type: 'text' },
       { label: 'Tel(s)', name: 'tels', type: 'text' },
@@ -107,6 +103,48 @@ const INITIAL_STATE = fromJS({
     }
   },
   acls: {
+    master: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `${ENTITY_URL}` },
+      {
+        keyPath: ['entityConfig', 'fields'],
+        replace: {
+          findKey: 'name', findValue: 'purchase', setWith: {
+            label: 'Purchase', name: 'purchase', type: 'choice',
+            choices: ['', 'Eva', 'Lucy', 'Dawson', 'Penny', 'Matthew']
+          }
+        }
+      },
+      {
+        keyPath: ['entityConfig', 'fields'],
+        replace: {
+          findKey: 'name', findValue: 'sales', setWith: {
+            label: 'Sales', name: 'sales', type: 'choice',
+            choices: ['', 'Dawson', 'Penny', 'Matthew']
+          }
+        }
+      }
+    ],
+    ppp: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `ppp-${ENTITY_URL}` },
+      {
+        keyPath: ['entityConfig', 'fields'],
+        replace: {
+          findKey: 'name', findValue: 'purchase', setWith: {
+            label: 'Purchase', name: 'purchase', type: 'choice',
+            choices: ['', 'Mon']
+          }
+        }
+      },
+      {
+        keyPath: ['entityConfig', 'fields'],
+        replace: {
+          findKey: 'name', findValue: 'sales', setWith: {
+            label: 'Sales', name: 'sales', type: 'choice',
+            choices: ['', 'Mon']
+          }
+        }
+      }
+    ],
     'purchase@123.com': [
       { keyPath: ['listView', 'ui', 'actions'], value: ['toggle'] },
       { keyPath: ['listView', 'ui', 'listActions'], value: [] },

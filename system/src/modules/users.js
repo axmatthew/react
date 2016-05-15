@@ -67,6 +67,7 @@ export function login(email, password) {
       } else {
         // turn matthew-cheng@email.com to Matthew Cheng
         const emailTokens = authData.password.email.replace(/@.*/, '').split('-');
+        let accountName = 'master';
         let username;
 
         if (emailTokens.length === 1) {
@@ -76,23 +77,26 @@ export function login(email, password) {
           ));
         } else {
           // handle other accont, e.g. ppp-mon@appx.hk
+          accountName = emailTokens[0];
+
           username = emailTokens[1].replace(/\b\w/g, m => (
             m.toUpperCase()
           ));
-
-          // Set accountName
-          dispatch(documentModule.setAccountName(emailTokens[0]));
         }
 
-        const user = { email, password, username };
+        const user = { email, password, username, accountName };
 
-        // Apply ACL config to all modules
+        // Apply account ACL config to all modules
+        dispatch(enquiryModule.applyAcl(accountName));
+        dispatch(purchaseOrderModule.applyAcl(accountName));
+        dispatch(documentModule.applyAcl(accountName));
+        dispatch(cashFlowModule.applyAcl(accountName));
+
+        // Apply user ACL config to all modules
         dispatch(enquiryModule.applyAcl(email));
         dispatch(purchaseOrderModule.applyAcl(email));
         dispatch(documentModule.applyAcl(email));
         dispatch(cashFlowModule.applyAcl(email));
-
-        dispatch(loginSuccess(user));
 
         // Set user object to localStorage for autoLogin use
         $.localStorage.set('user', user);
@@ -102,6 +106,8 @@ export function login(email, password) {
         dispatch(purchaseOrderModule.setListFilter('sales', user.username));
         dispatch(documentModule.setListFilter('username', user.username));
         dispatch(cashFlowModule.setListFilter('sales', user.username));
+
+        dispatch(loginSuccess(user));
       }
     });
   };

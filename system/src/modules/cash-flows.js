@@ -7,7 +7,7 @@ const TYPES = ['客訂金', '客尾數', '廠訂金', '廠尾數'];
 
 const INITIAL_STATE = fromJS({
   entityConfig: {
-    apiUrl: ENTITY_URL,
+    apiUrl: 'SET_IN_ACL',
     label: ENTITY_LABEL,
     url: ENTITY_URL,
     identity: '_id',
@@ -70,6 +70,12 @@ const INITIAL_STATE = fromJS({
     }
   },
   acls: {
+    master: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `${ENTITY_URL}` }
+    ],
+    ppp: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `ppp-${ENTITY_URL}` }
+    ],
     'purchase@123.com': [
       { keyPath: ['listView', 'ui', 'actions'], value: [] },
       { keyPath: ['listView', 'ui', 'listActions'], value: [] },

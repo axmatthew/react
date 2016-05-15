@@ -6,7 +6,7 @@ const ENTITY_LABEL = 'Enquiries';
 
 const INITIAL_STATE = fromJS({
   entityConfig: {
-    apiUrl: ENTITY_URL,
+    apiUrl: 'SET_IN_ACL',
     label: ENTITY_LABEL,
     iconClass: 'layers',
     url: ENTITY_URL,
@@ -16,10 +16,7 @@ const INITIAL_STATE = fromJS({
       { label: 'Date', name: 'date', type: 'date', defaultValue: () =>
         new Date().toISOString().substring(0, 10) },
       { label: 'Enquiry#', name: 'enquiryNum', type: 'text' },
-      // TODO: remove the first empty string?
-      { label: 'Sales', name: 'sales', type: 'choice', choices: [
-        '', 'Dawson', 'Penny', 'Matthew'
-      ] },
+      { label: 'Sales', name: 'sales', type: 'choice', choices: [] },
       { label: 'Company Name', name: 'companyName', type: 'text' },
       { label: 'Contact Person', name: 'contactPerson', type: 'text' },
       { label: 'Tel(s)', name: 'tels', type: 'text' },
@@ -81,6 +78,30 @@ const INITIAL_STATE = fromJS({
     }
   },
   acls: {
+    master: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `${ENTITY_URL}` },
+      {
+        keyPath: ['entityConfig', 'fields'],
+        replace: {
+          findKey: 'name', findValue: 'sales', setWith: {
+            label: 'Sales', name: 'sales', type: 'choice',
+            choices: ['', 'Dawson', 'Penny', 'Matthew']
+          }
+        }
+      }
+    ],
+    ppp: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `ppp-${ENTITY_URL}` },
+      {
+        keyPath: ['entityConfig', 'fields'],
+        replace: {
+          findKey: 'name', findValue: 'sales', setWith: {
+            label: 'Sales', name: 'sales', type: 'choice',
+            choices: ['', 'Mon']
+          }
+        }
+      }
+    ],
     'purchase@123.com': [
       { keyPath: ['listView', 'ui', 'actions'], value: ['toggle'] },
       { keyPath: ['listView', 'ui', 'listActions'], value: [] },

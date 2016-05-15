@@ -1,9 +1,10 @@
 /* global Firebase */
+import credentials from '../../../credentials';
 
 class FirebaseStore {
 
   init() {
-    this.FIREBASE_URL = 'https://trading-system.firebaseio.com/';
+    this.FIREBASE_URL = credentials.FIREBASE_URL;
     this.firebaseRef = new Firebase(this.FIREBASE_URL);
   }
 

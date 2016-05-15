@@ -25,6 +25,15 @@ class PurchaseOrderListViewContainer extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    // fetch data after login
+    if (this.props.user !== nextProps.user) {
+      if (this.props.data.get('entities').size === 0) {
+        this.props.fetchAll();
+      }
+    }
+  }
+
   render() {
     return React.createElement(PurchaseOrderListView,
       Object.assign({}, this.props, { fetchAll: undefined }));

@@ -9,7 +9,7 @@ const ENTITY_LABEL = 'Documents';
 
 const INITIAL_STATE = fromJS({
   entityConfig: {
-    apiUrl: ENTITY_URL,
+    apiUrl: 'SET_IN_ACL',
     label: ENTITY_LABEL,
     url: ENTITY_URL,
     identity: '_id',
@@ -26,8 +26,7 @@ const INITIAL_STATE = fromJS({
       { label: 'generated', name: 'generated', type: 'bool', disabled: true },
       { label: 'gSheetId', name: 'gSheetId', type: 'text', disabled: true }
     ],
-    iconClass: 'doc',
-    accountName: 'master'
+    iconClass: 'doc'
   },
   listView: {
     ui: {
@@ -75,6 +74,12 @@ const INITIAL_STATE = fromJS({
     }
   },
   acls: {
+    master: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `${ENTITY_URL}` }
+    ],
+    ppp: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `ppp-${ENTITY_URL}` }
+    ],
     'purchase@123.com': [
       { keyPath: ['listView', 'ui', 'actions'], value: [] },
       { keyPath: ['listView', 'ui', 'listActions'], value: [] },
@@ -88,8 +93,6 @@ export default Object.assign({}, originalEntityModule, (() => {
   const START_GENERATE_DOCUMENT = `${ENTITY_URL}/START_GENERATE_DOCUMENT`;
   const GENERATE_DOCUMENT_SUCCESS = `${ENTITY_URL}/GENERATE_DOCUMENT_SUCCESS`;
   const GENERATE_DOCUMENT_FAILURE = `${ENTITY_URL}/GENERATE_DOCUMENT_FAILURE`;
-
-  const SET_ACCOUNT_NAME = `${ENTITY_URL}/SET_ACCOUNT_NAME`;
 
   return {
 
@@ -112,9 +115,6 @@ export default Object.assign({}, originalEntityModule, (() => {
           // set error and cancel generating
           return state.setIn(['listView', 'ui', 'error'], action.payload)
             .setIn(['listView', 'ui', 'generating'], false);
-        case SET_ACCOUNT_NAME:
-          // set accountName
-          return state.setIn(['entityConfig', 'accountName'], action.payload);
         default:
           return state;
       }
@@ -130,7 +130,7 @@ export default Object.assign({}, originalEntityModule, (() => {
 
       // Create an dummy document object first
       const apiUrl = getState()[ENTITY_URL].getIn(['entityConfig', 'apiUrl']);
-      const accountName = getState()[ENTITY_URL].getIn(['entityConfig', 'accountName']);
+      const accountName = getState().users.getIn(['data', 'user', 'accountName']);
       const username = getState().users.getIn(['data', 'user', 'username']);
 
       StoreFactory.getInstance().insert(apiUrl, {
@@ -157,13 +157,7 @@ export default Object.assign({}, originalEntityModule, (() => {
           );
         }
       });
-    },
-
-    /** set the accountName for App Script Execution API */
-    setAccountName: accountName => ({
-      type: SET_ACCOUNT_NAME,
-      payload: accountName
-    })
+    }
 
   };
 

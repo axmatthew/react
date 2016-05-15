@@ -174,11 +174,26 @@ export function getEntityModule(entityUrl, INITIAL_STATE) {
           const acl = state.get('acls').get(action.payload);
 
           if (acl) {
-            return acl.reduce((prev, rule) => (
-              prev.setIn(rule.get('keyPath'), rule.get('value'))
-            ), state);
+            return acl.reduce((prev, rule) => {
+              const keyPath = rule.get('keyPath');
+
+              if (rule.get('replace')) {
+                // replace list item
+                const replaceRule = rule.get('replace');
+                const originalList = prev.getIn(keyPath);
+                const indexToReplace = originalList.findIndex(
+                  item => item.get(replaceRule.get('findKey')) === replaceRule.get('findValue'));
+
+                return prev.setIn(keyPath, originalList.set(
+                  indexToReplace, replaceRule.get('setWith')));
+              }
+
+              // simple replace
+              return prev.setIn(keyPath, rule.get('value'));
+            }, state);
           }
 
+          // No acl defined for this key
           return state;
         } default:
           return state;
@@ -326,9 +341,9 @@ export function getEntityModule(entityUrl, INITIAL_STATE) {
       type: HIDE_CONTEXT_MENU
     }),
 
-    applyAcl: email => ({
+    applyAcl: aclKey => ({
       type: APPLY_ACL,
-      payload: email
+      payload: aclKey
     })
 
   };
