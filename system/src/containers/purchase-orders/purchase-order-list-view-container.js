@@ -18,6 +18,7 @@ class PurchaseOrderListViewContainer extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
+  // FIXME: duplicate code with EnquiryListViewContainer
   componentWillMount() {
     // fetchAll if no entities, and do not unlisten on unmount
     if (this.props.data.get('entities').size === 0) {
@@ -25,6 +26,7 @@ class PurchaseOrderListViewContainer extends Component {
     }
   }
 
+  // FIXME: duplicate code with EnquiryListViewContainer
   componentWillReceiveProps(nextProps) {
     // fetch data after login
     if (this.props.user !== nextProps.user) {

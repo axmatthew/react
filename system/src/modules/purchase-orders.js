@@ -330,7 +330,6 @@ export default Object.assign({}, originalEntityModule, (() => {
 
       const apiUrl = getState()[ENTITY_URL].getIn(['entityConfig', 'apiUrl']);
 
-      // FIXME: do not listen to value changes
       StoreFactory.getInstance().retrieveBy(apiUrl, 'enquiryId', enquiryId, duplicates => {
         if (!duplicates) {
           dispatch(fetchDuplicatesForNewViewFailure('not found'));

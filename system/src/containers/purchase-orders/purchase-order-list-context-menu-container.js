@@ -40,6 +40,7 @@ export default connect(mapStateToProps, {
   remove: purchaseOrderModule.remove,
   updateEnquiry: enquiryModule.update,
   createCashFlows: purchaseOrderModule.createCashFlows,
+  cashFlowSetListFilter: cashFlowModule.setListFilter,
   cashFlowListSearch: cashFlowModule.listSearch,
 
   documentListSearch: documentModule.listSearch,

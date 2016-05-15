@@ -18,7 +18,7 @@ class FirebaseStore {
   }
 
   retrieveBy(name, key, value, valueCallback) {
-    this.firebaseRef.child(name).orderByChild(key).equalTo(value).on('value', snapshot => {
+    this.firebaseRef.child(name).orderByChild(key).equalTo(value).once('value', snapshot => {
       const val = snapshot.val();
       // Convert firebase map to entity array
       const entities = val ? Object.keys(val).map(_id => val[_id]) : [];

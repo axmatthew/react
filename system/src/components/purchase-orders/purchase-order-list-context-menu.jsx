@@ -11,6 +11,7 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
     cashFlowEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
     updateEnquiry: React.PropTypes.func.isRequired,
     createCashFlows: React.PropTypes.func.isRequired,
+    cashFlowSetListFilter: React.PropTypes.func.isRequired,
     cashFlowListSearch: React.PropTypes.func.isRequired,
 
     // FIXME: duplicate code with EnquiryListContextMenu
@@ -86,6 +87,8 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
     const entity = this.props.data.get('contextMenuEntity');
 
     // Redirect to cash flow list view with search value as enqiuryNum
+    // TODO: combine to clearFilterAndSearch?
+    this.props.cashFlowSetListFilter('sales', '');
     this.props.cashFlowListSearch(entity.get('poNum').substring(1));
     this.props.push(this.props.cashFlowEntityConfig.get('url'));
   }

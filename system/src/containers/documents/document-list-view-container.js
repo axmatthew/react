@@ -9,9 +9,7 @@ import { baseMapStateToProps } from '../container-helpers';
 class DocumentListViewContainer extends Component {
 
   static propTypes = Object.assign({}, DocumentListView.propTypes, {
-    fetchAll: React.PropTypes.func.isRequired,
-    fetchBy: React.PropTypes.func.isRequired,
-    unlistenAll: React.PropTypes.func.isRequired
+    fetchAll: React.PropTypes.func.isRequired
   });
 
   constructor() {
@@ -20,38 +18,22 @@ class DocumentListViewContainer extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
+  // FIXME: duplicate code with EnquiryListViewContainer
   componentWillMount() {
-    // user already set, i.e. from navigating
-    const username = this.props.user && this.props.user.get('username');
-
-    if (username) {
-      this.props.fetchBy('username', username);
+    // fetchAll if no entities, and do not unlisten on unmount
+    if (this.props.data.get('entities').size === 0) {
+      this.props.fetchAll();
     }
   }
 
+  // FIXME: duplicate code with EnquiryListViewContainer
   componentWillReceiveProps(nextProps) {
-    // only fetch data related to the user by default
+    // fetch data after login
     if (this.props.user !== nextProps.user) {
-      const username = nextProps.user && nextProps.user.get('username');
-      this.props.fetchBy('username', username);
-    }
-
-    // if ui.filters changed
-    if (this.props.ui.get('filters') !== nextProps.ui.get('filters')) {
-      const usernameFilter = nextProps.ui.get('filters')
-        .find(filter => filter.get('name') === 'username');
-
-      // if the sales filter is set to empty string, fetchAll
-      if (usernameFilter) {
-        if (!usernameFilter.get('value')) {
-          this.props.fetchAll();
-        }
+      if (this.props.data.get('entities').size === 0) {
+        this.props.fetchAll();
       }
     }
-  }
-
-  componentWillUnmount() {
-    this.props.unlistenAll();
   }
 
   render() {
@@ -63,8 +45,6 @@ class DocumentListViewContainer extends Component {
 
 export default connect(baseMapStateToProps.bind(null, documentModule.entityUrl, 'listView'), {
   fetchAll: documentModule.fetchAll,
-  fetchBy: documentModule.fetchBy,
-  unlistenAll: documentModule.unlistenAll,
 
   // Transfer to presentation component
   push,
