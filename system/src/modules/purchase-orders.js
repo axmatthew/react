@@ -104,7 +104,7 @@ const INITIAL_STATE = fromJS({
   },
   acls: {
     master: [
-      { keyPath: ['entityConfig', 'apiUrl'], value: `${ENTITY_URL}` },
+      { keyPath: ['entityConfig', 'apiUrl'], value: `master--${ENTITY_URL}` },
       {
         keyPath: ['entityConfig', 'fields'],
         replace: {
@@ -124,8 +124,29 @@ const INITIAL_STATE = fromJS({
         }
       }
     ],
+    ones: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `ones--${ENTITY_URL}` },
+      {
+        keyPath: ['entityConfig', 'fields'],
+        replace: {
+          findKey: 'name', findValue: 'purchase', setWith: {
+            label: 'Purchase', name: 'purchase', type: 'choice',
+            choices: ['', 'Kelvin', 'Mike', 'Wyman', 'Zach', 'Nancy', 'Fen']
+          }
+        }
+      },
+      {
+        keyPath: ['entityConfig', 'fields'],
+        replace: {
+          findKey: 'name', findValue: 'sales', setWith: {
+            label: 'Sales', name: 'sales', type: 'choice',
+            choices: ['', 'Kelvin', 'Mike', 'Wyman', 'Zach', 'Nancy']
+          }
+        }
+      }
+    ],
     ppp: [
-      { keyPath: ['entityConfig', 'apiUrl'], value: `ppp-${ENTITY_URL}` },
+      { keyPath: ['entityConfig', 'apiUrl'], value: `ppp--${ENTITY_URL}` },
       {
         keyPath: ['entityConfig', 'fields'],
         replace: {

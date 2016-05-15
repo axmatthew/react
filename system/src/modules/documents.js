@@ -75,10 +75,13 @@ const INITIAL_STATE = fromJS({
   },
   acls: {
     master: [
-      { keyPath: ['entityConfig', 'apiUrl'], value: `${ENTITY_URL}` }
+      { keyPath: ['entityConfig', 'apiUrl'], value: `master--${ENTITY_URL}` }
+    ],
+    ones: [
+      { keyPath: ['entityConfig', 'apiUrl'], value: `ones--${ENTITY_URL}` }
     ],
     ppp: [
-      { keyPath: ['entityConfig', 'apiUrl'], value: `ppp-${ENTITY_URL}` }
+      { keyPath: ['entityConfig', 'apiUrl'], value: `ppp--${ENTITY_URL}` }
     ],
     'purchase@123.com': [
       { keyPath: ['listView', 'ui', 'actions'], value: [] },
