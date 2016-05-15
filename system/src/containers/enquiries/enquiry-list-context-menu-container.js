@@ -37,5 +37,6 @@ export default connect(mapStateToProps, {
   update: enquiryModule.update,
   remove: enquiryModule.remove,
   documentListSearch: documentModule.listSearch,
+  documentSetListFilter: documentModule.setListFilter,
   generateDocument: documentModule.generateDocument
 })(EnquiryListContextMenuContainer);

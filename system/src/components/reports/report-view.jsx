@@ -14,33 +14,42 @@ class ReportView extends Component {
     purchaseOrders: React.PropTypes.instanceOf(List).isRequired
   };
 
-  componentDidUpdate() {
-    // TODO: better entities ready condition checking?
+  componentWillMount() {
     if (this.props.enquiries.size > 0 && this.props.purchaseOrders.size > 0) {
-      const drawMethods = [
-        () => this.drawSalesReportByStaff('sales-report-by-staff-container', po =>
-          Number(po.get('signDate').split('-')[0]) === new Date().getFullYear() &&
-          Number(po.get('signDate').split('-')[1]) === new Date().getMonth() + 1),
-        () => this.drawSalesReportByStaff('sales-report-by-staff-last-month-container', po =>
-          Number(po.get('signDate').split('-')[0]) === new Date().getFullYear() &&
-          Number(po.get('signDate').split('-')[1]) === new Date().getMonth(), 'Last month'),
-        () => this.drawSalesReportByMonth('sales-report-by-month-container'),
-        () => this.drawEnquiryReportByStaff('enquiry-report-by-staff-container'),
-        () => this.drawEnquiryReportByMonth('enquiry-report-by-month-container')
-      ];
-
-      // draw the graphs one by one otherwise google charts do not work
-      const DRAW_INTERVAL_MS = 600;
-      const timer = window.setInterval(() => {
-        const method = drawMethods.shift();
-
-        if (method) {
-          method();
-        } else {
-          window.clearInterval(timer);
-        }
-      }, DRAW_INTERVAL_MS);
+      this.drawAllReports();
     }
+  }
+
+  componentDidUpdate() {
+    if (this.props.enquiries.size > 0 && this.props.purchaseOrders.size > 0) {
+      this.drawAllReports();
+    }
+  }
+
+  drawAllReports() {
+    const drawMethods = [
+      () => this.drawSalesReportByStaff('sales-report-by-staff-container', po =>
+        Number(po.get('signDate').split('-')[0]) === new Date().getFullYear() &&
+        Number(po.get('signDate').split('-')[1]) === new Date().getMonth() + 1),
+      () => this.drawSalesReportByStaff('sales-report-by-staff-last-month-container', po =>
+        Number(po.get('signDate').split('-')[0]) === new Date().getFullYear() &&
+        Number(po.get('signDate').split('-')[1]) === new Date().getMonth(), 'Last month'),
+      () => this.drawSalesReportByMonth('sales-report-by-month-container'),
+      () => this.drawEnquiryReportByStaff('enquiry-report-by-staff-container'),
+      () => this.drawEnquiryReportByMonth('enquiry-report-by-month-container')
+    ];
+
+    // draw the graphs one by one otherwise google charts do not work
+    const DRAW_INTERVAL_MS = 600;
+    const timer = window.setInterval(() => {
+      const method = drawMethods.shift();
+
+      if (method) {
+        method();
+      } else {
+        window.clearInterval(timer);
+      }
+    }, DRAW_INTERVAL_MS);
   }
 
   drawEnquiryReportByStaff(containerId, filter = () => true, subTitle = 'All time') {

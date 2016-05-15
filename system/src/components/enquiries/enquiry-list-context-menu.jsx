@@ -11,6 +11,7 @@ class EnquiryListContextMenu extends ListContextMenu {
     poEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
     documentEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
     documentListSearch: React.PropTypes.func.isRequired,
+    documentSetListFilter: React.PropTypes.func.isRequired,
     generateDocument: React.PropTypes.func.isRequired
   });
 
@@ -83,6 +84,8 @@ class EnquiryListContextMenu extends ListContextMenu {
   handleOpenDocuments() {
     const entity = this.props.data.get('contextMenuEntity');
     // Redirect to document list view with search value as enqiuryNum
+    // TODO: combine to clearFilterAndSearch?
+    this.props.documentSetListFilter('username', '');
     this.props.documentListSearch(entity.get('enquiryNum'));
     this.props.push(this.props.documentEntityConfig.get('url'));
   }

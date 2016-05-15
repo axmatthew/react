@@ -40,9 +40,10 @@ export default connect(mapStateToProps, {
   remove: purchaseOrderModule.remove,
   updateEnquiry: enquiryModule.update,
   createCashFlows: purchaseOrderModule.createCashFlows,
-  cashFlowSetListFilter: cashFlowModule.setListFilter,
   cashFlowListSearch: cashFlowModule.listSearch,
+  cashFlowSetListFilter: cashFlowModule.setListFilter,
 
   documentListSearch: documentModule.listSearch,
+  documentSetListFilter: documentModule.setListFilter,
   generateDocument: documentModule.generateDocument
 })(PurchaseOrderListContextMenuContainer);

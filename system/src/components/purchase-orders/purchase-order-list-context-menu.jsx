@@ -17,6 +17,7 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
     // FIXME: duplicate code with EnquiryListContextMenu
     documentEntityConfig: React.PropTypes.instanceOf(Map).isRequired,
     documentListSearch: React.PropTypes.func.isRequired,
+    documentSetListFilter: React.PropTypes.func.isRequired,
     generateDocument: React.PropTypes.func.isRequired
   });
 
@@ -131,6 +132,8 @@ class PurchaseOrderListContextMenu extends ListContextMenu {
     const fakeEnquiry = entity.set('_id', entity.get('enquiryId'))
       .set('enquiryNum', entity.get('poNum').substring(1));
     // Redirect to document list view with search value as enqiuryNum
+    // TODO: combine to clearFilterAndSearch?
+    this.props.documentSetListFilter('username', '');
     this.props.documentListSearch(fakeEnquiry.get('enquiryNum'));
     this.props.push(this.props.documentEntityConfig.get('url'));
   }
