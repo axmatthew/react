@@ -1,5 +1,5 @@
 .dataTable th, .dataTable td {
-  max-width: 200px;
+  max-width: 150px;
   white-space: nowrap;
   overflow: hidden;
 }
