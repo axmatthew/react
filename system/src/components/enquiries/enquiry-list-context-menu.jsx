@@ -116,6 +116,10 @@ class EnquiryListContextMenu extends ListContextMenu {
           onItemClick={() => this.handleGenerateDocument('Quotation', 'Q')}
         />
         <ContextMenuItem
+          label="English Quotation"
+          onItemClick={() => this.handleGenerateDocument('EQuotation', 'Q')}
+        />
+        <ContextMenuItem
           label="Sales Confirmation"
           onItemClick={() => this.handleGenerateDocument('SalesConfirmation', 'S')}
         />
