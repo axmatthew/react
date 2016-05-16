@@ -22,6 +22,8 @@ ${entity.get('gSheetId')}/edit`, '_blank');
 
   handleDownloadPdf() {
     const entity = this.props.data.get('contextMenuEntity');
+    // google sheets can only set a specific boundary to print, cannot set bounded columns,
+    // and it need the gid (sheet id) for it to work
     window.open(`https://docs.google.com/spreadsheets/d/\
 ${entity.get('gSheetId')}/export?format=pdf&gridlines=0&portrait=1&fitw=1`, '_self');
   }
