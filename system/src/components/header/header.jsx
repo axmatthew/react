@@ -1,3 +1,4 @@
+/* global $ */
 import React from 'react';
 
 const Header = ({ headerDropdown }) => (
@@ -47,6 +48,14 @@ const Header = ({ headerDropdown }) => (
           <li className="hidden">
             <a href="javascript:void(0);" data-search-open>
               <em className="icon-magnifier" />
+            </a>
+          </li>
+          <li className="bg-pink">
+            <a
+              href="javascript:void(0);"
+              onClick={() => $('#gp-calculator').modal({ backdrop: false })}
+            >
+              <em className="fa fa-calculator" />
             </a>
           </li>
           {headerDropdown}

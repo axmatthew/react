@@ -13,6 +13,7 @@ import Footer from '../../components/footer/footer';
 import Sidebar from '../../components/sidebar/sidebar';
 import UserBlockContainer from '../users/user-block-container';
 import HeaderDropdownContainer from '../header/header-dropdown-container';
+import GPCalculator from '../../components/gp-calculator/gp-calculator';
 import './app.css';
 
 class App extends Component {
@@ -114,6 +115,7 @@ class App extends Component {
           {children}
         </section>
         <Footer />
+        <GPCalculator />
       </div>
     );
   }

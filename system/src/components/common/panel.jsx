@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Panel = ({ header, footer, children, type }) => (
+const Panel = ({ children, header, footer, type }) => (
   <div className={`panel panel-${type}`}>
     {header ? <div className="panel-heading">{header}</div> : null}
     <div className="panel-body">
@@ -15,8 +15,8 @@ Panel.defaultPropTypes = {
 };
 
 Panel.propTypes = {
-  header: React.PropTypes.node,
   children: React.PropTypes.node,
+  header: React.PropTypes.node,
   footer: React.PropTypes.node,
   type: React.PropTypes.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger'])
 };
