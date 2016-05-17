@@ -61,13 +61,20 @@ class EntityForm extends Component {
     this.props.entityConfig.get('fields').forEach(fieldConfig => {
       const name = fieldConfig.get('name');
       const validations = fieldConfig.get('validations');
+      const value = fields[name];
 
       if (validations) {
         // validation: required
         if (validations.get('required')) {
-          if (!fields[name] || fields[name].trim() === '') {
+          if (!value || value.trim() === '') {
             errors[name] = `${name} is required`;
           }
+        }
+
+        // custom validator
+        if (validations.get('validator')) {
+          const validator = validations.get('validator');
+          errors[name] = validator(value);
         }
       }
     });
