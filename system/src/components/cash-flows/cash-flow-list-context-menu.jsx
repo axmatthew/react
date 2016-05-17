@@ -16,28 +16,30 @@ class CashFlowListContextMenu extends ListContextMenu {
 
   handlePaid() {
     const entity = this.props.data.get('contextMenuEntity');
-    this.props.update(entity.get(this.props.entityConfig.get('identity')), { done: true });
+    const setPaid = !entity.get('done');
+    this.props.update(entity.get(this.props.entityConfig.get('identity')), { done: setPaid });
 
+    // set related payment flag
     switch (entity.get('type')) {
       case 0:
-        // case client deposit: set related payment flag
+        // case client deposit
         this.props.updatePurchaseOrder(entity.get('purchaseOrderId'),
-          { paidDeposit: true });
+          { paidDeposit: setPaid });
         break;
       case 1:
-        // case client remaining: set related payment flag
+        // case client remaining
         this.props.updatePurchaseOrder(entity.get('purchaseOrderId'),
-          { paidRemaining: true });
+          { paidRemaining: setPaid });
         break;
       case 2:
-        // case factory deposit: set related payment flag, and set status to Manufacturing
+        // case factory deposit, and set status to Manufacturing
         this.props.updatePurchaseOrder(entity.get('purchaseOrderId'),
-          { paidFactoryDeposit: true, status: 'Manufacturing' });
+          { paidFactoryDeposit: setPaid, status: setPaid ? 'Manufacturing' : 'Sample' });
         break;
       case 3:
-        // case factory remaining: set related payment flag, and set status to Delivering
+        // case factory remaining, and set status to Delivering
         this.props.updatePurchaseOrder(entity.get('purchaseOrderId'),
-          { paidFactoryRemaining: true, status: 'Delivering' });
+          { paidFactoryRemaining: setPaid, status: setPaid ? 'Delivering' : 'Manufacturing' });
         break;
       default:
         // EMPTY
@@ -45,7 +47,7 @@ class CashFlowListContextMenu extends ListContextMenu {
   }
 
   getContextMenuItems() {
-    return <ContextMenuItem label="Paid" onItemClick={this.handlePaid} />;
+    return <ContextMenuItem label="Paid / UnPaid" onItemClick={this.handlePaid} />;
   }
 
 }
