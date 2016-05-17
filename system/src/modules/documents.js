@@ -22,7 +22,8 @@ const INITIAL_STATE = fromJS({
         'Quotation', 'SalesConfirmation', 'Invoice', 'Receipt', 'DeliveryNote'
       ] },
       { label: 'Document#', name: 'documentNum', type: 'text' },
-      { label: 'Parameters', name: 'parameters', type: 'text' },
+      { label: 'Parameters', name: 'parameters', type: 'text',
+        transform: value => value.join(', ') },
       { label: 'generated', name: 'generated', type: 'bool', disabled: true },
       { label: 'gSheetId', name: 'gSheetId', type: 'text', disabled: true }
     ],
