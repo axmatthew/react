@@ -60,6 +60,11 @@ class DataTable extends Component {
     $('#datatable1').dataTable().api().destroy();
   }
 
+  handleExportCsv() {
+    const tableElt = $('#datatable1');
+    exportTableToCsv(tableElt);
+  }
+
   // Global search
   searchTableWithoutDraw(value) {
     $('#datatable1').dataTable().api().search(value);
@@ -68,11 +73,6 @@ class DataTable extends Component {
   // Column filter
   filterTableWithoutDraw(name, value) {
     $('#datatable1').dataTable().api().column(`${name}:name`).search(value, true, false);
-  }
-
-  handleExportCsv() {
-    const tableElt = $('#datatable1');
-    exportTableToCsv(tableElt);
   }
 
   filterTable() {

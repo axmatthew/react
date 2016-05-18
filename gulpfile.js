@@ -4,15 +4,16 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var awspublish = require('gulp-awspublish');
 var credentials = require('./credentials.js');
+var environment = require('./environment.js');
 
 gulp.task('build', function(cb) {
   // FIXME: duplicated code with webpack.config.js
   webpack({
     entry: [
-      './system/src/index.jsx' // Your appʼs entry point
+      './' + environment.APP + '/src/index.jsx' // Your appʼs entry point
     ],
     output: {
-      path: './system/build',
+      path: './' + environment.APP + '/build',
       publicPath: '/',
       filename: 'bundle.js'
     },
@@ -60,7 +61,7 @@ gulp.task('publish', function() {
     'Cache-Control': 'max-age=8, no-transform, public'
   };
 
-  return gulp.src('system/build/**/*')
+  return gulp.src(environment.APP + '/build/**/*')
     // gzip, Set Content-Encoding headers and add .gz extension
     // .pipe($.awspublish.gzip({ ext: '.gz' }))
 
