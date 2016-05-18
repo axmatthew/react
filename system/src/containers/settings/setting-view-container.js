@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import { fetch, update } from '../../modules/settings';
@@ -17,7 +16,6 @@ class SettingViewContainer extends Component {
   constructor() {
     super();
 
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 

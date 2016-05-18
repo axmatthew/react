@@ -1,5 +1,5 @@
+/* eslint react/prefer-stateless-function: 0 */
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import enquiryModule from '../../modules/enquiries';
@@ -11,12 +11,6 @@ class HeaderDropdownContainer extends Component {
     user: React.PropTypes.instanceOf(Map),
     enquiries: React.PropTypes.instanceOf(List).isRequired
   };
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   render() {
     const { user, enquiries } = this.props;

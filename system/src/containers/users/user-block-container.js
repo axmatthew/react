@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import { login, logout } from '../../modules/users';
@@ -17,7 +16,6 @@ class UserBlockContainer extends Component {
   constructor() {
     super();
 
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }

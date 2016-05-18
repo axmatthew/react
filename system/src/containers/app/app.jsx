@@ -1,6 +1,5 @@
 /* global gapi */
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import { autoLogin } from '../../modules/users';
@@ -36,8 +35,6 @@ class App extends Component {
 
   constructor() {
     super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
 
     this.handleAuthClick = this.handleAuthClick.bind(this);
   }

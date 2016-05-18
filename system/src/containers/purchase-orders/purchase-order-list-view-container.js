@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import purchaseOrderModule from '../../modules/purchase-orders';
@@ -11,12 +10,6 @@ class PurchaseOrderListViewContainer extends Component {
   static propTypes = Object.assign({}, PurchaseOrderListView.propTypes, {
     fetchAll: React.PropTypes.func.isRequired
   });
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   // FIXME: duplicate code with EnquiryListViewContainer
   componentDidMount() {

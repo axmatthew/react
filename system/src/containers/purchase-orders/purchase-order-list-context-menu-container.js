@@ -1,5 +1,5 @@
+/* eslint react/prefer-stateless-function: 0 */
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import enquiryModule from '../../modules/enquiries';
@@ -13,12 +13,6 @@ import { baseMapStateToProps } from '../container-helpers';
 class PurchaseOrderListContextMenuContainer extends Component {
 
   static propTypes = PurchaseOrderListContextMenu.propTypes;
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   render() {
     return React.createElement(PurchaseOrderListContextMenu, this.props);

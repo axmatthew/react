@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import enquiryModule from '../../modules/enquiries';
@@ -11,12 +10,6 @@ class EnquiryListViewContainer extends Component {
   static propTypes = Object.assign({}, EnquiryListView.propTypes, {
     fetchAll: React.PropTypes.func.isRequired
   });
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   componentDidMount() {
     // fetchAll if no entities, and do not unlisten on unmount

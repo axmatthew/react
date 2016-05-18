@@ -1,6 +1,5 @@
 /* global google */
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import enquiryModule from '../../modules/enquiries';
 import purchaseOrderModule from '../../modules/purchase-orders';
@@ -12,12 +11,6 @@ class ReportViewContainer extends Component {
     fetchAllEnquiries: React.PropTypes.func.isRequired,
     fetchAllPurchaseOrders: React.PropTypes.func.isRequired
   });
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   componentWillMount() {
     google.load('visualization', '1.1', { packages: ['bar'], callback: () => {

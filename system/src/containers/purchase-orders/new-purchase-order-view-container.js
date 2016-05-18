@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import purchaseOrderModule from '../../modules/purchase-orders';
 import NewPurchaseOrderView from '../../components/purchase-orders/new-purchase-order-view';
@@ -12,12 +11,6 @@ class NewPurchaseOrderViewContainer extends Component {
     fetchEnquiryForNewView: React.PropTypes.func.isRequired,
     fetchDuplicatesForNewView: React.PropTypes.func.isRequired
   });
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   componentWillMount() {
     this.props.fetchEnquiryForNewView(this.props.params.enquiryId);

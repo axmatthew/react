@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import cashFlowModule from '../../modules/cash-flows';
 import EditCashFlowView from '../../components/cash-flows/edit-cash-flow-view';
@@ -11,12 +10,6 @@ class EditCashFlowViewContainer extends Component {
     params: React.PropTypes.object.isRequired,
     fetch: React.PropTypes.func.isRequired
   });
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   componentDidMount() {
     this.props.fetch(this.props.params._id);

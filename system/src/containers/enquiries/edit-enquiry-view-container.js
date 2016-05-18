@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import enquiryModule from '../../modules/enquiries';
 import EditEnquiryView from '../../components/enquiries/edit-enquiry-view';
@@ -11,12 +10,6 @@ class EditEnquiryViewContainer extends Component {
     params: React.PropTypes.object.isRequired,
     fetch: React.PropTypes.func.isRequired
   });
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   componentDidMount() {
     this.props.fetch(this.props.params._id);

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import cashFlowModule from '../../modules/cash-flows';
@@ -11,12 +10,6 @@ class CashFlowListViewContainer extends Component {
   static propTypes = Object.assign({}, CashFlowListView.propTypes, {
     fetchAll: React.PropTypes.func.isRequired
   });
-
-  constructor() {
-    super();
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
 
   // FIXME: duplicate code with EnquiryListViewContainer
   componentDidMount() {
