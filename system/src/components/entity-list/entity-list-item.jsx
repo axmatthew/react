@@ -7,6 +7,7 @@ import './entity-list-item.css';
 class EntityListItem extends Component {
 
   static propTypes = {
+    settings: React.PropTypes.instanceOf(Map).isRequired,
     fieldConfigs: React.PropTypes.instanceOf(List).isRequired,
     cssClass: React.PropTypes.oneOfType([
       React.PropTypes.string,
@@ -60,7 +61,7 @@ class EntityListItem extends Component {
               }
 
               if (transform) {
-                value = transform(value, this.props.entity);
+                value = transform(value, this.props.entity, this.props.settings);
               }
 
               return value;

@@ -44,10 +44,10 @@ const INITIAL_STATE = fromJS({
       ], defaultValue: 'New' },
       { label: 'Finish Date', name: 'finishDate', type: 'date' },
       { label: 'Remarks', name: 'remarks', type: 'textarea' },
-      { label: 'G.P. %', name: 'gpPercentage', transform: (value, entity) =>
-        calculateGpPercentage(entity.toJS()), notEditable: true },
-      { label: 'Est. Profit (HKD)', name: 'estimateProfit', transform: (value, entity) =>
-        calculateGp(entity.toJS()), notEditable: true },
+      { label: 'G.P. %', name: 'gpPercentage', transform: (value, entity, settings) =>
+        calculateGpPercentage(entity.toJS(), settings.get('exchangeRate')), notEditable: true },
+      { label: 'Est. Profit (HKD)', name: 'estimateProfit', transform: (value, entity, settings) =>
+        calculateGp(entity.toJS(), settings.get('exchangeRate')), notEditable: true },
       { label: '已收客訂金', name: 'paidDeposit', type: 'bool' },
       { label: '已收客尾數', name: 'paidRemaining', type: 'bool' },
       { label: '已付廠訂金', name: 'paidFactoryDeposit', type: 'bool' },
@@ -173,9 +173,8 @@ const INITIAL_STATE = fromJS({
   }
 });
 
-function calculateGp(purchaseOrder) {
-  // FIXME: put exchange rate in a new settings module
-  const EX_HKD_RMB = 0.84;
+function calculateGp(purchaseOrder, exchangeRate) {
+  const EX_HKD_RMB = exchangeRate;
   const totalPrice = purchaseOrder.price * purchaseOrder.amount;
   const totalCost = purchaseOrder.cost *
     (purchaseOrder.amount + (purchaseOrder.spareAmount || 0)) +
@@ -186,12 +185,12 @@ function calculateGp(purchaseOrder) {
   return Math.round(gp || 0).toString();
 }
 
-function calculateGpPercentage(purchaseOrder) {
+function calculateGpPercentage(purchaseOrder, exchangeRate) {
   const totalPrice = purchaseOrder.price * purchaseOrder.amount;
 
   if (totalPrice === 0) return '';
 
-  const gp = calculateGp(purchaseOrder);
+  const gp = calculateGp(purchaseOrder, exchangeRate);
   const gpPercentage = gp / totalPrice;
 
   return `${((gpPercentage || 0) * 100).toFixed(1)}%`;

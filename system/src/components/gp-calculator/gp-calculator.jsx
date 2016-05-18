@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Map } from 'immutable';
 import Modal from '../common/modal';
 
 class GPCalculator extends Component {
@@ -12,8 +13,7 @@ class GPCalculator extends Component {
 
   calculate() {
     // Settings
-    // FIXME: put exchange rate in a new settings module
-    const EX_HKD_RMB = 0.84;
+    const EX_HKD_RMB = this.props.settings.get('exchangeRate');
     const BUFFER = 0.018;
 
     const totalPrice = Number(this.refs.price.value || 0) * Number(this.refs.amount.value || 0);
@@ -33,7 +33,7 @@ class GPCalculator extends Component {
   }
 
   calculateByGp() {
-    const EX_HKD_RMB = 0.84;
+    const EX_HKD_RMB = this.props.settings.get('exchangeRate');
     const BUFFER = 0.018;
     const gp = Number(this.refs.gp.value || 0);
     const totalCost = (Number(this.refs.cost.value || 0) +
@@ -57,7 +57,7 @@ class GPCalculator extends Component {
   }
 
   calculateOthers(totalPrice, bufferedTotalCost, gpPercentage) {
-    const EX_HKD_RMB = 0.84;
+    const EX_HKD_RMB = this.props.settings.get('exchangeRate');
     const MIN_GP_TABLE = [
       [200000, '神單', 0.22],
       [120000, '超大單', 0.235],
@@ -280,5 +280,9 @@ class GPCalculator extends Component {
   }
 
 }
+
+GPCalculator.propTypes = {
+  settings: React.PropTypes.instanceOf(Map).isRequired
+};
 
 export default GPCalculator;

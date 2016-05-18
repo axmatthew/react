@@ -6,6 +6,7 @@ import purchaseOrderModule from './purchase-orders';
 import documentModule from './documents';
 import cashFlowModule from './cash-flows';
 import users from './users';
+import settings from './settings';
 
 export default combineReducers({
   [enquiryModule.entityUrl]: enquiryModule.reducer,
@@ -13,6 +14,7 @@ export default combineReducers({
   [documentModule.entityUrl]: documentModule.reducer,
   [cashFlowModule.entityUrl]: cashFlowModule.reducer,
   users,
+  settings,
   // react-router-redux
   routing,
   // redux-form

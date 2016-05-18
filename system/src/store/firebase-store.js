@@ -33,6 +33,13 @@ class FirebaseStore {
     });
   }
 
+  retrieveOnce(name, valueCallback) {
+    // FIXME: currently do not listen in retrieveOne as it is difficult to unlisten
+    this.firebaseRef.child(name).once('value', snapshot => {
+      valueCallback(snapshot.val());
+    });
+  }
+
   unlistenAll(name) {
     this.firebaseRef.child(name).off('value');
   }
@@ -49,6 +56,10 @@ class FirebaseStore {
 
   update(name, _id, value, callback) {
     this.firebaseRef.child(`${name}/${_id}`).update(JSON.parse(JSON.stringify(value)), callback);
+  }
+
+  updateAll(name, value, callback) {
+    this.firebaseRef.child(name).update(JSON.parse(JSON.stringify(value)), callback);
   }
 
   remove(name, _id, callback) {

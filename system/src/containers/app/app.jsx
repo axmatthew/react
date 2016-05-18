@@ -13,7 +13,7 @@ import Footer from '../../components/footer/footer';
 import Sidebar from '../../components/sidebar/sidebar';
 import UserBlockContainer from '../users/user-block-container';
 import HeaderDropdownContainer from '../header/header-dropdown-container';
-import GPCalculator from '../../components/gp-calculator/gp-calculator';
+import GPCalculatorContainer from '../gp-calculator/gp-calculator-container';
 import './app.css';
 
 class App extends Component {
@@ -115,7 +115,7 @@ class App extends Component {
           {children}
         </section>
         <Footer />
-        <GPCalculator />
+        <GPCalculatorContainer />
       </div>
     );
   }
@@ -130,7 +130,8 @@ function mapStateToProps(state) {
       state[purchaseOrderModule.entityUrl].get('entityConfig'),
       state[documentModule.entityUrl].get('entityConfig'),
       state[cashFlowModule.entityUrl].get('entityConfig'),
-      Map({ label: 'Reports', url: 'reports', iconClass: 'graph' })
+      Map({ label: 'Reports', url: 'reports', iconClass: 'graph' }),
+      Map({ label: 'Settings', url: 'settings', iconClass: 'settings' })
     ])
   };
 }

@@ -52,6 +52,7 @@ class ReportViewContainer extends Component {
 
 function mapStateToProps(state) {
   return {
+    settings: state.settings.get('data'),
     user: state.users.getIn(['data', 'user']),
     enquiryListUi: state[enquiryModule.entityUrl].getIn(['listView', 'ui']),
     purchaseOrderListUi: state[purchaseOrderModule.entityUrl].getIn(['listView', 'ui']),

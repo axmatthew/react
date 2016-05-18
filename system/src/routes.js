@@ -16,11 +16,11 @@ import EditDocumentViewContainer from './containers/documents/edit-document-view
 import CashFlowListViewContainer from './containers/cash-flows/cash-flow-list-view-container';
 import EditCashFlowViewContainer from './containers/cash-flows/edit-cash-flow-view-container';
 import ReportViewContainer from './containers/reports/report-view-container';
+import SettingViewContainer from './containers/settings/setting-view-container';
 
 export default (
   <Route path="/" component={App}>
     <Route path="index.html" />
-    <Route path="reports" component={ReportViewContainer} />
     <Route path="enquiries" component={EnquiryListViewContainer} />
     <Route path="enquiries/new" component={NewEnquiryViewContainer} />
     <Route path="enquiries/edit/:_id" component={EditEnquiryViewContainer} />
@@ -32,5 +32,7 @@ export default (
     <Route path="documents/edit/:_id" component={EditDocumentViewContainer} />
     <Route path="cashFlows" component={CashFlowListViewContainer} />
     <Route path="cashFlows/edit/:_id" component={EditCashFlowViewContainer} />
+    <Route path="reports" component={ReportViewContainer} />
+    <Route path="settings" component={SettingViewContainer} />
   </Route>
 );

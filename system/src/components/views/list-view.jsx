@@ -80,7 +80,7 @@ class ListView extends Component {
   }
 
   render() {
-    const { entityConfig, ui, data } = this.props;
+    const { settings, entityConfig, ui, data } = this.props;
 
     // TODO: Use some design pattern
     const actions = ui.get('actions');
@@ -111,6 +111,7 @@ class ListView extends Component {
           {data.get('entities').map(
             entity => (
               <EntityListItem
+                settings={settings}
                 key={entity.get(entityConfig.get('identity'))}
                 fieldConfigs={entityConfig.get('fields').filter(field =>
                   field.get('type') !== 'hidden')}

@@ -7,6 +7,7 @@ import Panel from '../common/panel';
 class ReportView extends Component {
 
   static propTypes = {
+    settings: React.PropTypes.instanceOf(Map),
     user: React.PropTypes.instanceOf(Map),
     enquiryListUi: React.PropTypes.instanceOf(Map).isRequired,
     purchaseOrderListUi: React.PropTypes.instanceOf(Map).isRequired,
@@ -180,8 +181,7 @@ class ReportView extends Component {
 
   // FIXME: duplicate code with modules/purchase-orders.jsx
   calculateGp(purchaseOrder) {
-    // FIXME: put exchange rate in a new settings module
-    const EX_HKD_RMB = 0.84;
+    const EX_HKD_RMB = this.props.settings.get('exchangeRate');
     const totalPrice = purchaseOrder.price * purchaseOrder.amount;
     const totalCost = purchaseOrder.cost *
       (purchaseOrder.amount + (purchaseOrder.spareAmount || 0)) +

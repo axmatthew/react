@@ -27,9 +27,9 @@ const UserBlock = ({ fieldConfigs, loading, error, user, handleLogin, handleLogo
               <Form
                 form="login-form"
                 fields={fieldConfigs.map(field => field.get('name')).toJS()}
-                submitLabel={'Login'}
                 onSubmit={handleLogin}
                 fieldConfigs={fieldConfigs}
+                submitLabel={'Login'}
               />
             )
           }

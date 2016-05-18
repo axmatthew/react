@@ -5,6 +5,7 @@ import enquiryModule from './enquiries';
 import purchaseOrderModule from './purchase-orders';
 import documentModule from './documents';
 import cashFlowModule from './cash-flows';
+import { fetch as fetchSettings } from './settings';
 
 // Login
 const START_LOGIN = 'users/START_LOGIN';
@@ -85,6 +86,11 @@ export function login(email, password) {
         }
 
         const user = { email, password, username, accountName };
+
+        // TODO: put all below into some kind of postLogin hook?
+
+        // Fetch settings
+        dispatch(fetchSettings());
 
         // Apply account ACL config to all modules
         dispatch(enquiryModule.applyAcl(accountName));
