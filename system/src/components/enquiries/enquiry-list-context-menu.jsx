@@ -1,4 +1,4 @@
-/* global $ swal */
+/* global swal */
 import React from 'react';
 import { Map } from 'immutable';
 import ContextSubMenu from '../context-menu/context-sub-menu';

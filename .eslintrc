@@ -24,11 +24,15 @@
     }
   },
 
+  "globals": {
+    "$": false
+  },
+
   "rules": {
     "comma-dangle": 0,
     "indent": [2, 2, { "SwitchCase": 1 }],
     "react/prop-types": 0,
-    "object-curly-spacing": ["error", "always"],
+    "object-curly-spacing": [2, "always"],
     "new-cap": [2, {
       "capIsNewExceptions": ["List", "Stack", "Map", "OrderedMap", "Set", "OrderedSet", "Record"]
     }],
@@ -36,7 +40,7 @@
     "no-script-url": 0,
     "no-use-before-define": 0,
     "array-callback-return": 0,
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+    "no-underscore-dangle": [2, { "allow": ["_id"] }]
   }
 
 }

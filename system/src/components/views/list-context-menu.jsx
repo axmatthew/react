@@ -1,4 +1,4 @@
-/* global $ swal */
+/* global swal */
 import React, { Component } from 'react';
 import ContextMenu from '../context-menu/context-menu';
 import ContextMenuItem from '../context-menu/context-menu-item';

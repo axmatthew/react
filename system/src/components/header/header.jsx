@@ -1,4 +1,3 @@
-/* global $ */
 import React from 'react';
 
 function Header({ headerDropdown }) {

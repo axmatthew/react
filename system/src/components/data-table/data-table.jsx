@@ -1,4 +1,3 @@
-/* global $ */
 import React, { Component } from 'react';
 import { List } from 'immutable';
 import DataTableToolbar from './data-table-toolbar';

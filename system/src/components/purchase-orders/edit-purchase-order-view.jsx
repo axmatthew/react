@@ -1,4 +1,4 @@
-/* global $ swal */
+/* global swal */
 import EditView from '../views/edit-view';
 
 class EditPurchaseOrderView extends EditView {

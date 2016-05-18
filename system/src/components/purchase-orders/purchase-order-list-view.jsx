@@ -1,4 +1,4 @@
-/* global $ swal */
+/* global swal */
 import React from 'react';
 import PurchaseOrderListContextMenuContainer from
   '../../containers/purchase-orders/purchase-order-list-context-menu-container';

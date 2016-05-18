@@ -1,4 +1,3 @@
-/* global $ */
 import { fromJS } from 'immutable';
 import StoreFactory from '../store/store-factory';
 import enquiryModule from './enquiries';

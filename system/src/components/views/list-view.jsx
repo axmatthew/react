@@ -1,4 +1,4 @@
-/* global $ swal */
+/* global swal */
 import React, { Component } from 'react';
 import MainContent from '../common/main-content';
 import EntityList from '../entity-list/entity-list';

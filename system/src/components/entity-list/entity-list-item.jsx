@@ -1,4 +1,3 @@
-/* global $ */
 import React, { Component } from 'react';
 import { List, Map } from 'immutable';
 import { getFromValOrFunc } from '../../modules/entity-config-loader';
