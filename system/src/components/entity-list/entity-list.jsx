@@ -2,7 +2,7 @@ import React from 'react';
 import { Map } from 'immutable';
 import DataTable from '../data-table/data-table';
 
-const EntityList = (props) => {
+function EntityList(props) {
   const { entityConfig, ui, data, ...others } = props;
 
   return (
@@ -20,7 +20,7 @@ const EntityList = (props) => {
       {props.children}
     </DataTable>
   );
-};
+}
 
 EntityList.propTypes = {
   entityConfig: React.PropTypes.instanceOf(Map).isRequired,

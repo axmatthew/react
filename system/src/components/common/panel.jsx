@@ -1,14 +1,16 @@
 import React from 'react';
 
-const Panel = ({ children, header, footer, type }) => (
-  <div className={`panel panel-${type}`}>
-    {header ? <div className="panel-heading">{header}</div> : null}
-    <div className="panel-body">
-      {children}
+function Panel({ children, header, footer, type }) {
+  return (
+    <div className={`panel panel-${type}`}>
+      {header ? <div className="panel-heading">{header}</div> : null}
+      <div className="panel-body">
+        {children}
+      </div>
+      {footer ? <div className="panel-footer">{footer}</div> : null}
     </div>
-    {footer ? <div className="panel-footer">{footer}</div> : null}
-  </div>
-);
+  );
+}
 
 Panel.defaultPropTypes = {
   type: 'default'

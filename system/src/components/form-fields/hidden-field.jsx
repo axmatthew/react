@@ -1,9 +1,11 @@
 import React from 'react';
 import propTypes from './prop-types';
 
-const HiddenField = ({ field, inputId }) => (
-  <input id={inputId} type="hidden" {...field} />
-);
+function HiddenField({ field, inputId }) {
+  return (
+    <input id={inputId} type="hidden" {...field} />
+  );
+}
 
 HiddenField.propTypes = propTypes;
 

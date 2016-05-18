@@ -1,6 +1,5 @@
 import React from 'react';
-
-const ContextMenuDivider = () => (
+\nfunction ContextMenuDivider = () => (
   <li role="separator" class="divider"></li>
 );
 
