@@ -21,7 +21,7 @@ class SettingViewContainer extends Component {
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetch();
   }
 

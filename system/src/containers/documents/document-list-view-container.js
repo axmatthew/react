@@ -19,7 +19,7 @@ class DocumentListViewContainer extends Component {
   }
 
   // FIXME: duplicate code with EnquiryListViewContainer
-  componentWillMount() {
+  componentDidMount() {
     // fetchAll if no entities, and do not unlisten on unmount
     if (this.props.data.get('entities').size === 0) {
       this.props.fetchAll();

@@ -18,7 +18,7 @@ class EditEnquiryViewContainer extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetch(this.props.params._id);
   }
 
