@@ -1,6 +1,6 @@
 import React from 'react';
 import { Map } from 'immutable';
-import DataTable from '../data-table/data-table';
+import DataTable from '../../common/components/data-table/data-table';
 
 function EntityList(props) {
   const { entityConfig, ui, data, ...others } = props;

@@ -33,12 +33,7 @@ Reset password
 4. https://docs.strongloop.com/display/public/LB/Making+authenticated+requests
 
 ## ORM-like Layer (auto-generate)
-https://docs.djangoproject.com/en/1.9/topics/db/queries/
-https://github.com/dresende/node-orm2
-orm.connect
-const Person = db.define()
-Person.find
-Person.create
+
 
 
 ## Store / Service Layer (auto-generate)

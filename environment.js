@@ -1,2 +1,2 @@
-exports.APP = 'app-express';
+exports.APP = 'system';
 exports.NODE_ENV = 'development';

@@ -50,7 +50,7 @@ gulp.task('publish', function() {
   var publisher = awspublish.create({
     region: 'ap-southeast-1',
     params: {
-      Bucket: 'premium.appx.hk'
+      Bucket: 'ones.appx.hk'
     },
     accessKeyId: credentials.AWS_ACCESS_KEY_ID,
     secretAccessKey: credentials.AWS_SECRET_ACCESS_KEY
@@ -70,7 +70,7 @@ gulp.task('publish', function() {
     .pipe(publisher.publish(headers))
 
     // this will delete old files from the bucket
-    .pipe(publisher.sync())
+    .pipe(publisher.sync({ whitelistedFiles: ['images/uploads/'] }))
 
     // create a cache file to speed up consecutive uploads
     .pipe(publisher.cache())

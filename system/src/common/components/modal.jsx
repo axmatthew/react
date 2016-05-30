@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-function Modal({ children, title, size, ...props }) {
+function Modal({ children, title, size, confirmButton, ...props }) {
   return (
     <div
       className="modal fade"
@@ -9,7 +9,7 @@ function Modal({ children, title, size, ...props }) {
       role="dialog"
       {...props}
     >
-      <div className={classNames({ 'modal-dialog': true, [size]: true })}>
+      <div className={classNames('modal-dialog', { [size]: true })}>
         <div className="modal-content">
           <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal">
@@ -19,6 +19,7 @@ function Modal({ children, title, size, ...props }) {
           </div>
           <div className="modal-body">{children}</div>
           <div className="modal-footer">
+            {confirmButton}
             <button type="button" data-dismiss="modal" className="btn btn-default">Close</button>
           </div>
         </div>
@@ -34,7 +35,8 @@ Modal.defaultPropTypes = {
 Modal.propTypes = {
   children: React.PropTypes.node,
   title: React.PropTypes.string,
-  size: React.PropTypes.oneOf(['modal-sm', 'modal-lg'])
+  size: React.PropTypes.oneOf(['modal-sm', 'modal-lg']),
+  confirmButton: React.PropTypes.node
 };
 
 export default Modal;

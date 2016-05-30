@@ -1,7 +1,7 @@
 import React from 'react';
 import { fromJS, Map } from 'immutable';
-import MainContent from '../common/main-content';
-import Form from '../form/form';
+import MainContent from '../../common/components/main-content';
+import Form from '../../common/components/form/form';
 
 function SettingView({ ui, data, handleUpdate }) {
   return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainContent from '../common/main-content';
+import MainContent from '../../common/components/main-content';
 import EntityForm from '../entity-form/entity-form';
 import { basePropTypes } from '../component-helpers';
 

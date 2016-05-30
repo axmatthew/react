@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Map } from 'immutable';
-import Modal from '../common/modal';
+import Modal from '../../common/components/modal';
 
 class GPCalculator extends Component {
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
-import { login, logout } from '../../modules/users';
+import { login, logout } from '../../../modules/users';
 import UserBlock from '../../components/users/user-block';
 
 class UserBlockContainer extends Component {

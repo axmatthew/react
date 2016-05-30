@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
-import App from './containers/app/app';
+import App from './layouts/containers/app/app';
 import EnquiryListViewContainer from './containers/enquiries/enquiry-list-view-container';
 import NewEnquiryViewContainer from './containers/enquiries/new-enquiry-view-container';
 import EditEnquiryViewContainer from './containers/enquiries/edit-enquiry-view-container';

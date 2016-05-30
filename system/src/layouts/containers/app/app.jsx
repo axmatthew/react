@@ -2,17 +2,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
-import { autoLogin } from '../../modules/users';
-import enquiryModule from '../../modules/enquiries';
-import purchaseOrderModule from '../../modules/purchase-orders';
-import documentModule from '../../modules/documents';
-import cashFlowModule from '../../modules/cash-flows';
+import { autoLogin } from '../../../modules/users';
+import enquiryModule from '../../../modules/enquiries';
+import purchaseOrderModule from '../../../modules/purchase-orders';
+import documentModule from '../../../modules/documents';
+import cashFlowModule from '../../../modules/cash-flows';
+import GPCalculatorContainer from '../../../containers/gp-calculator/gp-calculator-container';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import Sidebar from '../../components/sidebar/sidebar';
 import UserBlockContainer from '../users/user-block-container';
 import HeaderDropdownContainer from '../header/header-dropdown-container';
-import GPCalculatorContainer from '../gp-calculator/gp-calculator-container';
 import './app.css';
 
 class App extends Component {

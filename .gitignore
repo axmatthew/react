@@ -1,7 +1,9 @@
 node_modules
 /npm-debug.log
 /credentials.js
-/components
+/app-express
+/leiman
+/ones
 /system/build
 .*
 !/.babelrc

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
-import enquiryModule from '../../modules/enquiries';
+import enquiryModule from '../../../modules/enquiries';
 import HeaderDropdown from '../../components/header/header-dropdown';
 
 class HeaderDropdownContainer extends Component {

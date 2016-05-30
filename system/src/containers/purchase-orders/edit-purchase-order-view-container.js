@@ -18,7 +18,7 @@ class EditPurchaseOrderViewContainer extends Component {
   render() {
     return React.createElement(
       EditPurchaseOrderView,
-      Object.assign({}, this.props, { fetch: undefined })
+      Object.assign({}, this.props, { params: undefined, fetch: undefined })
     );
   }
 

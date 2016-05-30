@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Map } from 'immutable';
-import LoadingOrError from '../common/loading-or-error';
-import Form from '../form/form';
+import LoadingOrError from '../../../common/components/loading-or-error';
+import Form from '../../../common/components/form/form';
 import './user-block.css';
 
 function UserBlock({ fieldConfigs, loading, error, user, handleLogin, handleLogout }) {

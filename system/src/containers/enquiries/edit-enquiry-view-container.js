@@ -18,7 +18,7 @@ class EditEnquiryViewContainer extends Component {
   render() {
     return React.createElement(
       EditEnquiryView,
-      Object.assign({}, this.props, { fetch: undefined })
+      Object.assign({}, this.props, { params: undefined, fetch: undefined })
     );
   }
 
