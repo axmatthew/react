@@ -1,5 +1,5 @@
 import React from 'react';
-import ContextMenuItem from '../context-menu/context-menu-item';
+import ContextMenuItem from '../../common/components/context-menu/context-menu-item';
 import ListContextMenu from '../views/list-context-menu';
 
 class DocumentListContextMenu extends ListContextMenu {
