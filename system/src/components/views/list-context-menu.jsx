@@ -1,7 +1,7 @@
 /* global swal */
 import React, { Component } from 'react';
-import ContextMenu from '../../common/components/context-menu/context-menu';
-import ContextMenuItem from '../../common/components/context-menu/context-menu-item';
+import ContextMenu from '../../common/components/ContextMenu';
+import ContextMenuItem from '../../common/components/ContextMenuItem';
 import { basePropTypes } from '../component-helpers';
 
 class ListContextMenu extends Component {

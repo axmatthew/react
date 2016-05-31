@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Map } from 'immutable';
 import { getFromValOrFunc } from '../../modules/entity-config-loader';
-import Form from '../../common/components/form/form';
+import Form from '../../common/components/Form';
 
 class EntityForm extends Component {
 

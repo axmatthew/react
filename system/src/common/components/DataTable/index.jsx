@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'immutable';
 import DataTableToolbar from './data-table-toolbar';
 import DataTableToolbarButton from './data-table-toolbar-button';
-import './data-table.css';
+import './style.css';
 
 class DataTable extends Component {
 

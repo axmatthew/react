@@ -1,7 +1,7 @@
 import React from 'react';
-import Panel from './panel';
-import LoadingOrError from './loading-or-error';
-import './main-content.css';
+import Panel from '../Panel';
+import LoadingOrError from '../LoadingOrError';
+import './style.css';
 
 function MainContent({ children, header, loading, error }) {
   return (

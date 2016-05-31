@@ -1,8 +1,8 @@
 /* global moment swal */
 import React from 'react';
 import { Map } from 'immutable';
-import ContextSubMenu from '../../common/components/context-menu/context-sub-menu';
-import ContextMenuItem from '../../common/components/context-menu/context-menu-item';
+import ContextSubMenu from '../../common/components//ContextSubMenu';
+import ContextMenuItem from '../../common/components/ContextMenuItem';
 import ListContextMenu from '../views/list-context-menu';
 
 class PurchaseOrderListContextMenu extends ListContextMenu {

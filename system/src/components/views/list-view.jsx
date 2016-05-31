@@ -1,6 +1,6 @@
 /* global swal */
 import React, { Component } from 'react';
-import MainContent from '../../common/components/main-content';
+import MainContent from '../../common/components/MainContent';
 import EntityList from '../entity-list/entity-list';
 import EntityListItem from '../entity-list/entity-list-item';
 import { basePropTypes } from '../component-helpers';

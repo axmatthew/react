@@ -1,5 +1,5 @@
 import React from 'react';
-import './context-menu.css';
+import './style.css';
 
 function ContextMenu({ children, display, left, top }) {
   return (

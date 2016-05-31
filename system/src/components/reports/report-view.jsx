@@ -1,8 +1,8 @@
 /* global google */
 import React, { Component } from 'react';
 import { List, Map } from 'immutable';
-import MainContent from '../../common/components/main-content';
-import Panel from '../../common/components/panel';
+import MainContent from '../../common/components/MainContent';
+import Panel from '../../common/components/Panel';
 
 class ReportView extends Component {
 

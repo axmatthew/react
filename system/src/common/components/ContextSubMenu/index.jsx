@@ -1,5 +1,4 @@
 import React from 'react';
-import './context-menu.css';
 
 function ContextSubMenu({ children, label }) {
   return (

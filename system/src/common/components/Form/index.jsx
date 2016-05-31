@@ -1,7 +1,7 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { List, Map } from 'immutable';
-import FormField from '../form-fields/form-field';
+import FormField from '../FormField';
 
 // redux-form
 function Form({

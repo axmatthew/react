@@ -1,5 +1,5 @@
 import React from 'react';
-import ContextMenuItem from '../../common/components/context-menu/context-menu-item';
+import ContextMenuItem from '../../common/components/ContextMenuItem';
 import ListContextMenu from '../views/list-context-menu';
 
 class CashFlowListContextMenu extends ListContextMenu {
