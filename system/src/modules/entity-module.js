@@ -1,7 +1,7 @@
 /* global moment */
 import { push } from 'react-router-redux';
 import { fromJS, Map } from 'immutable';
-import StoreFactory from '../store/store-factory';
+import StoreFactory from './store-factory';
 
 export function getEntityModule(entityUrl, INITIAL_STATE) {
   const SET_PAGE = `${entityUrl}/SET_PAGE`;

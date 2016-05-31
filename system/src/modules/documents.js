@@ -1,7 +1,7 @@
 /* global gapi moment */
 import { push } from 'react-router-redux';
 import { fromJS } from 'immutable';
-import StoreFactory from '../store/store-factory';
+import StoreFactory from './store-factory';
 import { getEntityModule } from './entity-module';
 
 const ENTITY_URL = 'documents';

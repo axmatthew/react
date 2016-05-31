@@ -2,7 +2,7 @@
 import { push } from 'react-router-redux';
 import { fromJS } from 'immutable';
 import { getEntityModule } from './entity-module';
-import StoreFactory from '../store/store-factory';
+import StoreFactory from './store-factory';
 import enquiryModule from './enquiries';
 import cashFlowModule from './cash-flows';
 

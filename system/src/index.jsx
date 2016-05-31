@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { Router, useRouterHistory } from 'react-router';
 import { createHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
+import configureStore from './store/configure-store';
 import routes from './routes';
-import configureStore from './configure-store';
 
 // FIXME: shouldn't this will create the <base href> automatically?
 const browserHistory = useRouterHistory(createHistory)({

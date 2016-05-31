@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import StoreFactory from '../store/store-factory';
+import StoreFactory from './store-factory';
 
 const ENTITY_URL = 'settings';
 
